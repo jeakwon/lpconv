@@ -9,12 +9,15 @@ class LpConv2d(nn.Conv2d):
         super(LpConv2d, self).__init__(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size,
                                        stride=stride, padding=padding, bias=bias, *args, **kwargs)
 
-        s_xx, s_yy = _pair(sigma)
-        self.C = nn.Parameter( torch.Tensor([[1/(s_xx + 1e-4), 0], [0, 1/(s_yy + 1e-4)]]).repeat(out_channels, 1, 1) )
+        sigma = _pair(sigma)
+        C_00 = 1 / (sigma[0] + 1e-4)
+        C_11 = 1 / (sigma[1] + 1e-4)
+        self.C = nn.Parameter( torch.Tensor( [[C_00, 0], [0, C_11]] ).repeat(out_channels, 1, 1) )
         self.log2p = nn.Parameter( torch.Tensor([log2p]).repeat(out_channels) )
 
     def forward(self, input):
-        return lp_convolution(input, self.out_channels, self.weight, self.bias, self.C, self.log2p, self.kernel_size, self.stride, self.padding, self.dilation, self.groups)
+        return lp_convolution(input, self.out_channels, self.weight, self.bias, self.C, self.log2p, 
+        self.kernel_size, self.stride, self.padding, self.dilation, self.groups)
 
     def set_requires_grad(self, **params):
         for param, requires_grad in params.items():
@@ -63,10 +66,10 @@ def lp_convolution(input, out_channels, weight, bias, C, log2p, kernel_size, str
     offset = torch.stack( [xx - x0, yy - y0] )
 
     # set bounds and constraints to keep C symmetric and positive definite
-    C[:, 0, 0].data = s_xx = torch.clamp(C[:, 0, 0], min=1e-4)
-    C[:, 1, 1].data = s_yy = torch.clamp(C[:, 1, 1], min=1e-4)
-    C[:, 0, 1].data = torch.max(C[:, 1, 1], torch.sqrt( s_xx * s_yy ))
-    C[:, 1, 0].data = torch.max(C[:, 1, 1], torch.sqrt( s_xx * s_yy ))
+    C[:, 0, 0].data = C_00 = torch.clamp(C[:, 0, 0], min=1e-4)
+    C[:, 1, 1].data = C_11 = torch.clamp(C[:, 1, 1], min=1e-4)
+    C[:, 0, 1].data = C_01 = torch.max(C[:, 1, 1], torch.sqrt( C_00 * C_11 ))
+    C[:, 1, 0].data = C_10 = torch.max(C[:, 1, 1], torch.sqrt( C_00 * C_11 ))
 
     Z = torch.einsum('cij, jmn -> cimn', C, offset).abs()
     mask = torch.exp( - Z.pow( 2**log2p[:, None, None, None] ).sum(dim=1, keepdim=True) )
