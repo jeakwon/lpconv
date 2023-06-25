@@ -12,11 +12,12 @@ class LpConv2d(nn.Conv2d):
         sigma = _pair(sigma)
         C_00 = 1 / (sigma[0] + 1e-4)
         C_11 = 1 / (sigma[1] + 1e-4)
-        self.C = nn.Parameter( torch.Tensor( [[C_00, 0], [0, C_11]] ).repeat(out_channels, 1, 1) )
         if log2p is None:
             self.register_buffer('log2p', None)
+            self.register_buffer('C', None)
         else:
             self.log2p = nn.Parameter( torch.Tensor([log2p]).repeat(out_channels) )
+            self.C = nn.Parameter( torch.Tensor( [[C_00, 0], [0, C_11]] ).repeat(out_channels, 1, 1) )
 
     def forward(self, input):
         return lp_convolution(input, self.out_channels, self.weight, self.bias, self.C, self.log2p, 
