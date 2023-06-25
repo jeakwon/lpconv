@@ -13,7 +13,10 @@ class LpConv2d(nn.Conv2d):
         C_00 = 1 / (sigma[0] + 1e-4)
         C_11 = 1 / (sigma[1] + 1e-4)
         self.C = nn.Parameter( torch.Tensor( [[C_00, 0], [0, C_11]] ).repeat(out_channels, 1, 1) )
-        self.log2p = nn.Parameter( torch.Tensor([log2p]).repeat(out_channels) )
+        if log2p is None:
+            self.register_buffer('log2p', None)
+        else:
+            self.log2p = nn.Parameter( torch.Tensor([log2p]).repeat(out_channels) )
 
     def forward(self, input):
         return lp_convolution(input, self.out_channels, self.weight, self.bias, self.C, self.log2p, 
@@ -56,7 +59,9 @@ class LpConv2d(nn.Conv2d):
         return new_conv2d
 
 def lp_convolution(input, out_channels, weight, bias, C, log2p, kernel_size, stride, padding, dilation, groups):
-
+    if log2p is None:
+        return F.conv2d(input, weight, bias, stride, padding, dilation, groups)
+        
     # offsets from kernel center
     x = torch.arange( kernel_size[0] ).to(input.device)
     y = torch.arange( kernel_size[1] ).to(input.device)
