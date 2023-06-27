@@ -161,3 +161,43 @@ def lp2b_convnext_small_cifar100(pretrained=False, **kwargs):
 def lp2b_convnext_tiny_cifar100(pretrained=False, **kwargs):
     model = models.convnext_tiny(pretrained=pretrained, num_classes=100)
     return LpConvert(model, log2p=2)
+
+# ViT
+@register_model
+def lp2b_vit_s_cifar100(pretrained=False, **kwargs):
+    model = models.VisionTransformer(
+        image_size=32,
+        patch_size=4,
+        num_layers=12,
+        num_heads=6,
+        hidden_dim=384,
+        mlp_dim=1536,
+        num_classes=100
+    )
+    return LpConvert(model, log2p=2)
+
+@register_model
+def lp2b_vit_b_cifar100(pretrained=False, **kwargs):
+    model = models.VisionTransformer(
+        image_size=32,
+        patch_size=4,
+        num_layers=12,
+        num_heads=12,
+        hidden_dim=768,
+        mlp_dim=3072,
+        num_classes=100
+    )
+    return LpConvert(model, log2p=2)
+
+@register_model
+def lp2b_vit_l_cifar100(pretrained=False, **kwargs):
+    model = models.VisionTransformer(
+        image_size=32,
+        patch_size=4,
+        num_layers=24,
+        num_heads=16,
+        hidden_dim=1024,
+        mlp_dim=4096,
+        num_classes=100
+    )
+    return LpConvert(model, log2p=2)
