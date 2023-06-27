@@ -7,6 +7,7 @@ from .cifar100_lp2b import *
 from .cifar100_lp2c import *
 from .cifar100_lp2f import *
 from .cifar100_non import *
+from .imnet1k import *
 from .imnet200 import *
 from .imnet200_lp import *
 from .imnet200_lp2 import *

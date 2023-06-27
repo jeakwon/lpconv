@@ -8,7 +8,6 @@ from .lpconv import LpConvert
 @register_model
 def alexnet_imnet200(pretrained=False, **kwargs):
     model = models.alexnet(pretrained=pretrained, num_classes=200)
-    model.features[0] = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1) # for cifar shape 32x32
     return model
 
 # VGG
@@ -57,88 +56,74 @@ def vgg19_bn_imnet200(pretrained=False, **kwargs):
 @register_model
 def resnet18_imnet200(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=200)
-    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 @register_model
 def resnet34_imnet200(pretrained=False, **kwargs):
     model = models.resnet34(pretrained=pretrained, num_classes=200)
-    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 @register_model
 def resnet50_imnet200(pretrained=False, **kwargs):
     model = models.resnet50(pretrained=pretrained, num_classes=200)
-    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 @register_model
 def resnet101_imnet200(pretrained=False, **kwargs):
     model = models.resnet101(pretrained=pretrained, num_classes=200)
-    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 @register_model
 def resnet152_imnet200(pretrained=False, **kwargs):
     model = models.resnet152(pretrained=pretrained, num_classes=200)
-    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 # DenseNet
 @register_model
 def densenet121_imnet200(pretrained=False, **kwargs):
     model = models.densenet121(pretrained=pretrained, num_classes=200)
-    model.features.conv0 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 @register_model
 def densenet161_imnet200(pretrained=False, **kwargs):
     model = models.densenet161(pretrained=pretrained, num_classes=200)
-    model.features.conv0 = nn.Conv2d(3, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 @register_model
 def densenet169_imnet200(pretrained=False, **kwargs):
     model = models.densenet169(pretrained=pretrained, num_classes=200)
-    model.features.conv0 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 @register_model
 def densenet201_imnet200(pretrained=False, **kwargs):
     model = models.densenet201(pretrained=pretrained, num_classes=200)
-    model.features.conv0 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 # WideResNet
 @register_model
 def wide_resnet50_2_imnet200(pretrained=False, **kwargs):
     model = models.wide_resnet50_2(pretrained=pretrained, num_classes=200)
-    model.features.conv0 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 @register_model
 def wide_resnet101_2_imnet200(pretrained=False, **kwargs):
     model = models.wide_resnet101_2(pretrained=pretrained, num_classes=200)
-    model.features.conv0 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return model
 
 # ResNeXt
 @register_model
 def resnext50_32x4d_imnet200(pretrained=False, **kwargs):
     model = models.resnext50_32x4d(pretrained=pretrained, num_classes=200)
-    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) 
     return model
 
 @register_model
 def resnext101_32x8d_imnet200(pretrained=False, **kwargs):
     model = models.resnext101_32x8d(pretrained=pretrained, num_classes=200)
-    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) 
     return model
 
 @register_model
 def resnext101_64x4d_imnet200(pretrained=False, **kwargs):
     model = models.resnext101_64x4d(pretrained=pretrained, num_classes=200)
-    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) 
     return model
 
 # ConvNeXt
