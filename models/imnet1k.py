@@ -7,8 +7,7 @@ from .lpconv import LpConvert
 # AlexNet
 @register_model
 def alexnet_imnet1k(pretrained=True, **kwargs):
-    weights = models.AlexNet_Weights.DEFAULT if pretrained else None
-    model = models.alexnet(weights=weights)
+    model = models.alexnet(weights=torch.load("~/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth"))
     return model
 
 # VGG
