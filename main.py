@@ -57,7 +57,7 @@ def get_args_parser():
     parser.add_argument('--model', default='deit_base_patch16_224', type=str, metavar='MODEL',
                         help='Name of model to train')
     parser.add_argument('--input-size', default=224, type=int, help='images input size')
-
+    parser.add_argument('--pretrained-weights', default='', help='resume from pretrained-weights')
     parser.add_argument('--drop', type=float, default=0.0, metavar='PCT',
                         help='Dropout rate (default: 0.)')
     parser.add_argument('--drop-path', type=float, default=0.1, metavar='PCT',
@@ -290,9 +290,11 @@ def main(args):
             label_smoothing=args.smoothing, num_classes=args.nb_classes)
 
     print(f"Creating model: {args.model}")
+    weights = torch.load(args.pretrained_weights) if args.pretrained_weights else None
     model = create_model(
         args.model,
         pretrained=False,
+        weights=weights,
         num_classes=args.nb_classes,
         drop_rate=args.drop,
         drop_path_rate=args.drop_path,
