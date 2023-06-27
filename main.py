@@ -290,6 +290,7 @@ def main(args):
             label_smoothing=args.smoothing, num_classes=args.nb_classes)
 
     print(f"Creating model: {args.model}")
+    print(f"{args.pretrained_weights}")
     if args.pretrained_weights:
         weights = torch.load(args.pretrained_weights)
         model = create_model(
