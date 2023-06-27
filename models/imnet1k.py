@@ -22,10 +22,7 @@ def vgg16_bn_imnet1k(pretrained=True, **kwargs):
     "acc@1": 73.360,
     "acc@5": 91.516,
     """
-    path = "/mnt/lustre/ibs/jeakwon/pretrained_models/vgg16_bn.pth"
-    weights = torch.load(path)
-    print(weights)
-    model = models.vgg16_bn(weights=weights)
+    model = models.vgg16_bn(pretrained=pretrained)
     return model
 
 @register_model
