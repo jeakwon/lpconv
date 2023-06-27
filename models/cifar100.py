@@ -161,3 +161,57 @@ def convnext_small_cifar100(pretrained=False, **kwargs):
 def convnext_tiny_cifar100(pretrained=False, **kwargs):
     model = models.convnext_tiny(pretrained=pretrained, num_classes=100)
     return model
+
+# ViT
+@register_model
+def vit_ti_cifar100(pretrained=False, **kwargs):
+    model = models.VisionTransformer(
+        image_size=32,
+        patch_size=4,
+        num_layers=12,
+        num_heads=3,
+        hidden_dim=192,
+        mlp_dim=768,
+        num_classes=100
+    )
+    return model
+
+@register_model
+def vit_s_cifar100(pretrained=False, **kwargs):
+    model = models.VisionTransformer(
+        image_size=32,
+        patch_size=4,
+        num_layers=12,
+        num_heads=6,
+        hidden_dim=384,
+        mlp_dim=1536,
+        num_classes=100
+    )
+    return model
+
+@register_model
+def vit_b_cifar100(pretrained=False, **kwargs):
+    model = models.VisionTransformer(
+        image_size=32,
+        patch_size=4,
+        num_layers=12,
+        num_heads=12,
+        hidden_dim=768,
+        mlp_dim=3072,
+        num_classes=100
+    )
+    return model
+
+@register_model
+def vit_l_cifar100(pretrained=False, **kwargs):
+    model = models.VisionTransformer(
+        image_size=32,
+        patch_size=4,
+        num_layers=24,
+        num_heads=16,
+        hidden_dim=1024,
+        mlp_dim=4096,
+        num_classes=100
+    )
+    return model
+
