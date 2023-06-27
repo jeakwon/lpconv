@@ -302,7 +302,7 @@ def main(args):
     if args.pretrained_weights:
         print(f"Load pretrained weights: {args.pretrained_weights}")
         weights = torch.load(args.pretrained_weights)
-        model.load_state_dict(weights.get_state_dict(progress=True, check_hash=True))
+        model.load_state_dict(weights)
 
     if args.flops:
         if not has_fvcore:
