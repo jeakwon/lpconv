@@ -290,26 +290,19 @@ def main(args):
             label_smoothing=args.smoothing, num_classes=args.nb_classes)
 
     print(f"Creating model: {args.model}")
+
+    model = create_model(
+        args.model,
+        pretrained=False,
+        num_classes=args.nb_classes,
+        drop_rate=args.drop,
+        drop_path_rate=args.drop_path,
+        drop_block_rate=None,
+    )
     if args.pretrained_weights:
-        print(f"{args.pretrained_weights}")
+        print(f"Load pretrained weights: {args.pretrained_weights}")
         weights = torch.load(args.pretrained_weights)
-        model = create_model(
-            args.model,
-            weights=weights,
-            num_classes=args.nb_classes,
-            drop_rate=args.drop,
-            drop_path_rate=args.drop_path,
-            drop_block_rate=None,
-        )
-    else:
-        model = create_model(
-            args.model,
-            pretrained=False,
-            num_classes=args.nb_classes,
-            drop_rate=args.drop,
-            drop_path_rate=args.drop_path,
-            drop_block_rate=None,
-        )
+        model.load_state_dict(weights.get_state_dict(progress=True, check_hash=True))
 
     if args.flops:
         if not has_fvcore:
