@@ -19,3 +19,4 @@ from .imnet200_lp2f import *
 from .imnet200_non import *
 
 from .imnet1k import *
+from .imnet1k_lp2a import *
