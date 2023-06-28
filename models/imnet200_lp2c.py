@@ -6,143 +6,143 @@ from .lpconv2 import LpConvert
 
 # AlexNet
 @register_model
-def alexnet_imnet200(pretrained=False, **kwargs):
+def lp2c_alexnet_imnet200(pretrained=False, **kwargs):
     model = models.alexnet(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 # VGG
 @register_model
-def vgg11_imnet200(pretrained=False, **kwargs):
+def lp2c_vgg11_imnet200(pretrained=False, **kwargs):
     model = models.vgg11(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def vgg13_imnet200(pretrained=False, **kwargs):
+def lp2c_vgg13_imnet200(pretrained=False, **kwargs):
     model = models.vgg13(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def vgg16_imnet200(pretrained=False, **kwargs):
+def lp2c_vgg16_imnet200(pretrained=False, **kwargs):
     model = models.vgg16(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def vgg19_imnet200(pretrained=False, **kwargs):
+def lp2c_vgg19_imnet200(pretrained=False, **kwargs):
     model = models.vgg19(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 # VGG + BN
 @register_model
-def vgg11_bn_imnet200(pretrained=False, **kwargs):
+def lp2c_vgg11_bn_imnet200(pretrained=False, **kwargs):
     model = models.vgg11_bn(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def vgg13_bn_imnet200(pretrained=False, **kwargs):
+def lp2c_vgg13_bn_imnet200(pretrained=False, **kwargs):
     model = models.vgg13_bn(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def vgg16_bn_imnet200(pretrained=False, **kwargs):
+def lp2c_vgg16_bn_imnet200(pretrained=False, **kwargs):
     model = models.vgg16_bn(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def vgg19_bn_imnet200(pretrained=False, **kwargs):
+def lp2c_vgg19_bn_imnet200(pretrained=False, **kwargs):
     model = models.vgg19_bn(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 # ResNet
 @register_model
-def resnet18_imnet200(pretrained=False, **kwargs):
+def lp2c_resnet18_imnet200(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def resnet34_imnet200(pretrained=False, **kwargs):
+def lp2c_resnet34_imnet200(pretrained=False, **kwargs):
     model = models.resnet34(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def resnet50_imnet200(pretrained=False, **kwargs):
+def lp2c_resnet50_imnet200(pretrained=False, **kwargs):
     model = models.resnet50(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def resnet101_imnet200(pretrained=False, **kwargs):
+def lp2c_resnet101_imnet200(pretrained=False, **kwargs):
     model = models.resnet101(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def resnet152_imnet200(pretrained=False, **kwargs):
+def lp2c_resnet152_imnet200(pretrained=False, **kwargs):
     model = models.resnet152(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 # DenseNet
 @register_model
-def densenet121_imnet200(pretrained=False, **kwargs):
+def lp2c_densenet121_imnet200(pretrained=False, **kwargs):
     model = models.densenet121(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def densenet161_imnet200(pretrained=False, **kwargs):
+def lp2c_densenet161_imnet200(pretrained=False, **kwargs):
     model = models.densenet161(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def densenet169_imnet200(pretrained=False, **kwargs):
+def lp2c_densenet169_imnet200(pretrained=False, **kwargs):
     model = models.densenet169(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def densenet201_imnet200(pretrained=False, **kwargs):
+def lp2c_densenet201_imnet200(pretrained=False, **kwargs):
     model = models.densenet201(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 # WideResNet
 @register_model
-def wide_resnet50_2_imnet200(pretrained=False, **kwargs):
+def lp2c_wide_resnet50_2_imnet200(pretrained=False, **kwargs):
     model = models.wide_resnet50_2(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def wide_resnet101_2_imnet200(pretrained=False, **kwargs):
+def lp2c_wide_resnet101_2_imnet200(pretrained=False, **kwargs):
     model = models.wide_resnet101_2(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 # ResNeXt
 @register_model
-def resnext50_32x4d_imnet200(pretrained=False, **kwargs):
+def lp2c_resnext50_32x4d_imnet200(pretrained=False, **kwargs):
     model = models.resnext50_32x4d(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def resnext101_32x8d_imnet200(pretrained=False, **kwargs):
+def lp2c_resnext101_32x8d_imnet200(pretrained=False, **kwargs):
     model = models.resnext101_32x8d(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def resnext101_64x4d_imnet200(pretrained=False, **kwargs):
+def lp2c_resnext101_64x4d_imnet200(pretrained=False, **kwargs):
     model = models.resnext101_64x4d(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 # ConvNeXt
 @register_model
-def convnext_base_imnet200(pretrained=False, **kwargs):
+def lp2c_convnext_base_imnet200(pretrained=False, **kwargs):
     model = models.convnext_base(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def convnext_large_imnet200(pretrained=False, **kwargs):
+def lp2c_convnext_large_imnet200(pretrained=False, **kwargs):
     model = models.convnext_large(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def convnext_small_imnet200(pretrained=False, **kwargs):
+def lp2c_convnext_small_imnet200(pretrained=False, **kwargs):
     model = models.convnext_small(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
 
 @register_model
-def convnext_tiny_imnet200(pretrained=False, **kwargs):
+def lp2c_convnext_tiny_imnet200(pretrained=False, **kwargs):
     model = models.convnext_tiny(pretrained=pretrained, num_classes=200)
-    return model
+    return LpConvert(model, log2p=3)
