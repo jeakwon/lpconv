@@ -75,3 +75,12 @@ def lp2a_convnext_base_imnet1k(pretrained=False, **kwargs):
     """
     model = models.convnext_base(pretrained=pretrained)
     return LpConvert(model, log2p=1)
+
+@register_model
+def lp2a_convnext_tiny_imnet1k(pretrained=False, **kwargs):
+    """https://github.com/pytorch/vision/blob/c9ac3a5b03731fa17d3934b552f308791314602b/torchvision/models/convnext.py#L217
+    "acc@1": 82.520,
+    "acc@5": 96.146,
+    """
+    model = models.convnext_tiny(pretrained=pretrained)
+    return LpConvert(model, log2p=1)
