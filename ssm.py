@@ -65,6 +65,7 @@ def get_activations(data, model):
     return center_activations(activations)
 
 def sim_pearson(X):
+    # https://github.com/ShahabBakht/ventral-dorsal-model/blob/a959ac56650468894aa07a2e95eaf80250922791/RSM/generate_SSM.py#L70
     # X is [dim, samples]
     dX = (X.T - np.mean(X.T, axis=0)).T
     sigma = np.sqrt(np.mean(dX**2, axis=1)) + 1e-7
@@ -113,3 +114,33 @@ def get_model_RSM(path_to_checkpoint, path_to_data):
     model_RSM = compute_similarity_matrices(activations)
     return model_RSM
 
+def load_brain_RSM(path):
+    return torch.load(path)
+
+def compute_ssm(similarity1, similarity2, num_shuffles=None, num_folds=None):
+    # https://github.com/ShahabBakht/ventral-dorsal-model/blob/a959ac56650468894aa07a2e95eaf80250922791/RSM/generate_SSM.py#L96C1-L121C11
+    '''
+	similarity1: first similarity matrix as a numpy array of size n X n
+	similarity2: second similarity matrix as a numpy array of size n X n
+	num_shuffles: Number of shuffles to perform to generate a distribution of SSM values
+	num_folds: Number of folds to split stimuli set into
+    
+	Output: the spearman rank correlation of the similarity matrices
+    '''
+    if num_shuffles is not None:
+        raise NotImplementedError()
+        
+    if num_folds is not None:
+	    raise NotImplementedError()
+    
+    try:
+        from scipy.stats import spearmanr
+        from scipy.stats import kendalltau
+        lowertri_idx = np.tril_indices(similarity1.shape[0],k=-1)
+        similarity1_lowertri = similarity1[lowertri_idx]
+        similarity2_lowertri = similarity2[lowertri_idx]
+        r,_ = kendalltau(similarity1_lowertri,similarity2_lowertri)
+        return r
+    except:
+	    print("Error in calculating spearman correlation")
+	    raise
