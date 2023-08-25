@@ -73,6 +73,17 @@ def compute_similarity_matrices(feature_dict, layers=None):
 
 	Output: a dictionary containing layer activation similarity matrices as numpy arrays
 	'''
+
+    def sim_pearson(X):
+        # X is [dim, samples]
+        dX = (X.T - np.mean(X.T, axis=0)).T
+        sigma = np.sqrt(np.mean(dX**2, axis=1)) + 1e-7
+
+        cor = np.dot(dX, dX.T)/(dX.shape[1]*sigma)
+        cor = (cor.T/sigma).T
+
+        return cor
+
 	similarity_mat_dict = {}
 	if layers is not None:
 		for layer in layers:
