@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 
 import numpy as np
+import pandas as pd
 from functools import partial
 import collections
 
@@ -144,3 +145,14 @@ def compute_ssm(similarity1, similarity2, num_shuffles=None, num_folds=None):
     except:
 	    print("Error in calculating spearman correlation")
 	    raise
+
+def compute_reps(model_RSM, brain_RSM):
+    rows = []
+    for layer_name, layer_RSM in model_RSM.items():
+        for struct_name, struct_RSM in brain_RSM.items():
+            for session in range(struct_RSM.shape[2]):
+                ssm = compute_ssm(layer_RSM, struct_RSM[:, :, session])
+                row = dict(layer=layer_name, struct=struct_name, session=session, ssm=ssm)
+                rows.append(row)
+
+    return pd.DataFrame(rows)
