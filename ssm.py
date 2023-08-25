@@ -118,6 +118,9 @@ def get_model_RSM(path_to_checkpoint, path_to_data):
 def load_brain_RSM(path):
     return torch.load(path)
 
+def load_brain_RSM_noise_ceiling(path):
+    return torch.load(path)
+
 def compute_ssm(similarity1, similarity2, num_shuffles=None, num_folds=None):
     # https://github.com/ShahabBakht/ventral-dorsal-model/blob/a959ac56650468894aa07a2e95eaf80250922791/RSM/generate_SSM.py#L96C1-L121C11
     '''
@@ -146,7 +149,7 @@ def compute_ssm(similarity1, similarity2, num_shuffles=None, num_folds=None):
 	    print("Error in calculating spearman correlation")
 	    raise
 
-def compute_reps(model_RSM, brain_RSM):
+def compute_reps(model_RSM, brain_RSM, noise_ceiling=None):
     rows = []
     for layer_name, layer_RSM in model_RSM.items():
         for struct_name, struct_RSM in brain_RSM.items():
@@ -155,4 +158,5 @@ def compute_reps(model_RSM, brain_RSM):
                 row = dict(layer=layer_name, struct=struct_name, session=session, ssm=ssm)
                 rows.append(row)
 
-    return pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
+    return df
