@@ -118,7 +118,7 @@ def get_model_RSM(path_to_checkpoint, path_to_data):
 def load_brain_RSM(path):
     return torch.load(path)
 
-def load_brain_RSM_noise_ceiling(path):
+def load_noise_ceiling(path):
     noise_ceiling = torch.load(path)
     return pd.DataFrame(noise_ceiling)
 
@@ -162,12 +162,12 @@ def compute_reps(model_RSM, brain_RSM):
     df = pd.DataFrame(rows)
     return df
 
-def noise_corrected_ssm(path_to_checkpoint, path_to_data, path_to_brain_rsm, path_to_brain_RSM_noise_ceiling):
+def noise_corrected_ssm(path_to_checkpoint, path_to_data, path_to_brain_rsm, path_to_noise_ceiling):
     model_RSM = get_model_RSM(path_to_checkpoint, path_to_data)
-    brain_RSM = load_brain_RSM(path_to_brain_rsm_noise)
+    brain_RSM = load_brain_RSM(path_to_brain_rsm)
     
     r = compute_reps(model_RSM, brain_RSM)
 
-    noise_ceiling = load_brain_RSM_noise_ceiling(path_to_brain_RSM_noise_ceiling)
+    noise_ceiling = load_noise_ceiling(path_to_noise_ceiling)
 
     return r, noise_ceiling
