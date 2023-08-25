@@ -182,6 +182,7 @@ def noise_corrected_ssm(path_to_checkpoint, path_to_data, path_to_brain_rsm, pat
     return noise_corrected_ssm
 
 if __name__ == '__main__':
+    import os
     import argparse
     parser = argparse.ArgumentParser('', add_help=False)
     parser.add_argument('--checkpoint', '-c', type=str, default='')
@@ -197,4 +198,12 @@ if __name__ == '__main__':
         args.rsm,
         args.noise,
     )
+    
+    checkpoint_dir = os.path.dirname(args.checkpoint)
+    data_name = os.path.splitext(os.path.basename(args.data))[0]
+    rsm_name = os.path.splitext(os.path.basename(args.rsm))[0]
+
+    csv_name = f'ssm_[{data_name}]{rsm_name}.csv'
+    csv_path = os.path.join(checkpoint_dir, csv_name)
+    df.to_csv(csv_path)
     print(df)
