@@ -24,7 +24,7 @@ def get_activations(data, model):
     def save_activation(name, mod, inp, out):
         activations[name].append(out.cpu())
 
-    for name, m in net.named_modules():
+    for name, m in model.named_modules():
         if type(m)==nn.Conv2d:
             # partial to assign the layer name to each hook
             m.register_forward_hook(partial(save_activation, name))
