@@ -185,9 +185,9 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser('', add_help=False)
     parser.add_argument('--checkpoint', '-c', type=str, default='')
-    parser.add_argument('--data', '-d', type=str, default='')
-    parser.add_argument('--rsm', '-r', type=str, default='')
-    parser.add_argument('--noise', '-n', type=str, default='')
+    parser.add_argument('--data', '-d', type=str, default="natural_scenes.pt")
+    parser.add_argument('--rsm', '-r', type=str, default="Cux2-CreERT2_RSM.pt")
+    parser.add_argument('--noise', '-n', type=str, default="Cux2-CreERT2_noise_ceilings.pt")
 
     args = parser.parse_args()
 
