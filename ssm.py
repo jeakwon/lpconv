@@ -181,3 +181,20 @@ def noise_corrected_ssm(path_to_checkpoint, path_to_data, path_to_brain_rsm, pat
     noise_corrected_ssm = pd.concat([corrected_ssm, corrected_err], axis=1).reset_index()
     return noise_corrected_ssm
 
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser('', add_help=False)
+    parser.add_argument('--checkpoint', '-c', type=str, default='')
+    parser.add_argument('--data', '-d', type=str, default='')
+    parser.add_argument('--rsm', '-r', type=str, default='')
+    parser.add_argument('--noise', '-n', type=str, default='')
+
+    args = parser.parse_args()
+
+    df = noise_corrected_ssm(
+        args.checkpoint,
+        args.data,
+        args.rsm,
+        args.noise,
+    )
+    print(df)
