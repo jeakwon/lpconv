@@ -1,4 +1,5 @@
 import torch
+import models 
 
 def load_checkpoint(path_to_checkpoint):
     checkpoint = torch.load(path_to_checkpoint, map_location='cpu')
