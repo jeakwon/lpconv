@@ -152,11 +152,11 @@ def compute_ssm(similarity1, similarity2, num_shuffles=None, num_folds=None):
 
 def compute_reps(model_RSM, brain_RSM):
     rows = []
-    for layer_name, layer_RSM in model_RSM.items():
+    for layer_order, (layer_name, layer_RSM) in enumerate(model_RSM.items()):
         for struct_name, struct_RSM in brain_RSM.items():
             for session in range(struct_RSM.shape[2]):
                 ssm = compute_ssm(layer_RSM, struct_RSM[:, :, session])
-                row = dict(layer=layer_name, struct=struct_name, session=session, ssm=ssm)
+                row = dict(layer_order=layer_order, layer_name=layer_name, struct_name=struct_name, session=session, ssm=ssm)
                 rows.append(row)
 
     df = pd.DataFrame(rows)
@@ -170,7 +170,7 @@ def noise_corrected_ssm(path_to_checkpoint, path_to_data, path_to_brain_rsm, pat
 
     noise_ceiling = load_noise_ceiling(path_to_noise_ceiling)
     
-    ssm_median = reps.groupby(['layer', 'struct']).median()['ssm'].unstack()
+    ssm_median = reps.groupby(['layer_order', 'struct_name']).median()['ssm'].unstack()
     noise_median = noise_ceiling.median()
 
     corrected_ssm = ssm_median.div(noise_median, axis=1)
