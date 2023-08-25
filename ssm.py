@@ -166,8 +166,12 @@ def noise_corrected_ssm(path_to_checkpoint, path_to_data, path_to_brain_rsm, pat
     model_RSM = get_model_RSM(path_to_checkpoint, path_to_data)
     brain_RSM = load_brain_RSM(path_to_brain_rsm)
     
-    r = compute_reps(model_RSM, brain_RSM)
+    reps = compute_reps(model_RSM, brain_RSM)
 
     noise_ceiling = load_noise_ceiling(path_to_noise_ceiling)
+    
+    ssm_median = reps.groupby(['layer', 'struct']).median()['ssm'].unstack()
+    noise_median = noise_ceiling.median()
 
-    return r, noise_ceiling
+    corrected_ssm = ssm_median.div(noise_median, axis=1)
+    return corrected_ssm
