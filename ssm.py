@@ -63,3 +63,41 @@ def get_activations(data, model):
         return feature_dict_centered
 
     return center_activations(activations)
+
+def compute_similarity_matrices(feature_dict, layers=None):
+    # https://github.com/ShahabBakht/ventral-dorsal-model/blob/a959ac56650468894aa07a2e95eaf80250922791/RSM/generate_SSM.py#L30
+
+	'''
+	feature_dict: a dictionary containing layer activations as numpy arrays
+	layers: list of model layers for which features are to be generated
+
+	Output: a dictionary containing layer activation similarity matrices as numpy arrays
+	'''
+	similarity_mat_dict = {}
+	if layers is not None:
+		for layer in layers:
+			try:
+				activation_arr = feature_dict[layer]
+				activations_flattened = activation_arr.reshape((activation_arr.shape[0],-1))
+				similarity_mat_dict[layer] = sim_pearson(activations_flattened) #np.corrcoef(activations_flattened)
+			except Exception as e:
+				print(layer)
+				raise e
+	else:
+		for layer,activation_arr in feature_dict.items():
+			try:
+				activations_flattened = activation_arr.reshape((activation_arr.shape[0],-1))
+				similarity_mat_dict[layer] = sim_pearson(activations_flattened) #np.corrcoef(activations_flattened)
+			except Exception as e:
+				print(layer,activation_arr.shape)
+				raise e
+
+	return similarity_mat_dict
+
+def get_model_RSM(path_to_checkpoint, path_to_data):
+    model = load_checkpoint(path_to_checkpoint)
+    data = load_natural_scenes(path_to_data)
+    activations = get_activations(data, model)
+    model_RSM = compute_similarity_matrices(activations)
+    return model_RSM
+
