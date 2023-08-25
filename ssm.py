@@ -7,3 +7,6 @@ def load_checkpoint(path_to_checkpoint):
     model = getattr(models, args.model)(num_classes=args.nb_classes)
     model.load_state_dict(checkpoint['model'])
     return model
+
+def load_natural_scences(path_to_data):
+    return torch.load(path_to_data)
