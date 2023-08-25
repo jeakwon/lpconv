@@ -198,6 +198,7 @@ if __name__ == '__main__':
         args.rsm,
         args.noise,
     )
+    print(df)
     
     checkpoint_dir = os.path.dirname(args.checkpoint)
     data_name = os.path.splitext(os.path.basename(args.data))[0]
@@ -206,4 +207,4 @@ if __name__ == '__main__':
     csv_name = f'ssm_[{data_name}]{rsm_name}.csv'
     csv_path = os.path.join(checkpoint_dir, csv_name)
     df.to_csv(csv_path)
-    print(df)
+    print('Saved at: ', csv_path)
