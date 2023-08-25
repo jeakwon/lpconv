@@ -119,8 +119,7 @@ def load_brain_RSM(path):
     return torch.load(path)
 
 def load_noise_ceiling(path):
-    noise_ceiling = torch.load(path)
-    return pd.DataFrame(noise_ceiling)
+    return torch.load(path)
 
 def compute_ssm(similarity1, similarity2, num_shuffles=None, num_folds=None):
     # https://github.com/ShahabBakht/ventral-dorsal-model/blob/a959ac56650468894aa07a2e95eaf80250922791/RSM/generate_SSM.py#L96C1-L121C11
