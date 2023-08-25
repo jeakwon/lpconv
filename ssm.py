@@ -170,8 +170,14 @@ def noise_corrected_ssm(path_to_checkpoint, path_to_data, path_to_brain_rsm, pat
 
     noise_ceiling = load_noise_ceiling(path_to_noise_ceiling)
     
-    ssm_median = reps.groupby(['layer_order', 'struct_name']).median()['ssm'].unstack()
+    ssm_med = reps.groupby(['layer_order', 'struct_name']).median()['ssm'].unstack()
+    ssm_std = reps.groupby(['layer_order', 'struct_name']).std()['ssm'].unstack()
     noise_median = noise_ceiling.median()
 
-    corrected_ssm = ssm_median.div(noise_median, axis=1)
-    return corrected_ssm
+    corrected_ssm = ssm_med.div(noise_median, axis=1).stack()
+    corrected_err = ssm_std.div(noise_median, axis=1).stack()/2
+    corrected_ssm.name = 'ssm'
+    corrected_err.name = 'err'
+    noise_corrected_ssm = pd.concat([corrected_ssm, corrected_err], axis=1).reset_index()
+    return noise_corrected_ssm
+
