@@ -75,7 +75,7 @@ def test(device, test_loader, model, criterion, verbose=False, debug=False):
 
     return avg_test_loss, sudoku_test_accs
 
-def bechmark(model=SudokuCNN(), save_dir='../output_dir', data_path='../sudoku.csv', batch_size=100, lr=3e-4, epochs=10, verbose=False, debug=False):
+def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../sudoku.csv', batch_size=100, lr=3e-4, epochs=10, verbose=False, debug=False):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     train_dataset, test_dataset = get_sudoku_dataset(data_path)
 
