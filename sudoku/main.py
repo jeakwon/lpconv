@@ -115,5 +115,5 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir', data_path='../sudoku.c
         pd.concat(avg_test_accs, axis=1).T.to_csv( os.path.join(save_dir, 'avg_test_accs.csv'))
         pd.DataFrame(dict(train_loss=avg_train_losses, test_loss=avg_test_losses)).to_csv( os.path.join(save_dir, 'loss.csv') )
 
-if __main__ == "__name__":
+if __name__ == "__main__":
     bechmark(verbose=True, debug=True)
