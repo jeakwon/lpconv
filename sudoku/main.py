@@ -1,0 +1,119 @@
+import os
+import numpy as numpy
+import pandas as pd
+
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader
+
+from dataset import DatasetInstance, get_sudoku_dataset
+from model import sudoku_lpconv
+from metrics import eval_num_accs, eval_sudokus
+
+def train(device, train_loader, model, criterion, optimizer, verbose=False, debug=False):
+    loss_sum = 0
+    accs = []
+    model.train()
+    for i, (inputs, targets) in enumerate(train_loader):
+        inputs, targets = inputs.to(device), targets.to(device)
+        outputs = model(inputs)
+
+        loss = criterion(outputs , targets)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        loss_sum += loss.item()
+        preds = torch.argmax(outputs,dim=1)
+
+        num_accs = eval_num_accs(preds.detach().cpu(), targets.detach().cpu())
+        acc = eval_sudokus(preds.detach().cpu())
+        acc['number'] = num_accs
+        accs.append(acc)
+
+        avg_train_loss = loss_sum/(i+1)
+        sudoku_train_accs = pd.concat(accs)
+
+        if verbose and (i%100==0):
+            avg_acc = ' '.join(f'{sudoku_train_accs.mean()}'.split()[:-2])
+            print(f'[{i}/{len(train_loader)}] Avg Loss: {avg_train_loss:.4f} Avg Acc: {avg_acc}')
+
+        if debug:
+            break
+
+    return avg_train_loss, sudoku_train_accs
+
+def test(device, test_loader, model, criterion, verbose=False, debug=False):
+    with torch.no_grad():
+        loss_sum = 0
+        accs = []
+        model.eval()
+        for i, (inputs, targets) in enumerate(test_loader):
+            inputs, targets = inputs.to(device), targets.to(device)
+            outputs = model(inputs)
+
+            loss = criterion(outputs , targets)
+
+            loss_sum += loss.item()
+            preds = torch.argmax(outputs,dim=1)
+
+            num_accs = eval_num_accs(preds.detach().cpu(), targets.detach().cpu())
+            acc = eval_sudokus(preds.detach().cpu())
+            acc['number'] = num_accs
+            accs.append(acc)
+
+            avg_test_loss = loss_sum/(i+1)
+            sudoku_test_accs = pd.concat(accs)
+
+            if verbose and (i%100==0):
+                avg_acc = ' '.join(f'{sudoku_test_accs.mean()}'.split()[:-2])
+                print(f'[{i}/{len(test_loader)}] Avg Loss: {avg_test_loss:.4f} Avg Acc: {avg_acc}')
+            
+            if debug:
+                break
+
+    return avg_test_loss, sudoku_test_accs
+
+def bechmark(model=SudokuCNN(), save_dir='../output_dir', data_path='../sudoku.csv', batch_size=100, lr=3e-4, epochs=10, verbose=False, debug=False):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    train_dataset, test_dataset = get_sudoku_dataset(data_path)
+
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
+    test_loader  = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
+
+    model = model.to(device)
+    criterion = nn.CrossEntropyLoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+
+    best_test_loss = float('inf')  # initialize to a very high value
+
+    avg_train_accs = []
+    avg_test_accs = []
+    avg_train_losses = []
+    avg_test_losses = []
+    for epoch in range(epochs):
+        avg_train_loss, sudoku_train_accs = train(device, train_loader, model, criterion, optimizer, verbose=verbose, debug=debug)
+        avg_test_loss, sudoku_test_accs = test(device, test_loader, model, criterion, verbose=verbose, debug=debug)
+        avg_train_accs.append( sudoku_train_accs.mean() )
+        avg_test_accs.append( sudoku_test_accs.mean() )
+        avg_train_losses.append( avg_train_loss )
+        avg_test_losses.append( avg_test_loss )
+
+
+        if avg_test_loss < best_test_loss:
+            best_test_loss = avg_test_loss
+            checkpoint_path = os.path.join(save_dir, 'sudoku_cnn_checkpoint.pth')
+            torch.save(model.state_dict(), checkpoint_path)
+
+        avg_train_acc = ' '.join(f'{sudoku_train_accs.mean()}'.split()[:-2])
+        avg_test_acc = ' '.join(f'{sudoku_test_accs.mean()}'.split()[:-2])
+        print(f'[Epochs: {epoch}/{epochs}] Avg Train Loss: {avg_train_loss:.4f} Avg Train Acc: {avg_train_acc}')
+        print(f'[Epochs: {epoch}/{epochs}] Avg Test Loss: {avg_test_loss:.4f} Avg Test Acc: {avg_test_acc}')
+
+        pd.concat(avg_train_accs, axis=1).T.to_csv( os.path.join(save_dir, 'avg_train_accs.csv'))
+        pd.concat(avg_test_accs, axis=1).T.to_csv( os.path.join(save_dir, 'avg_test_accs.csv'))
+        pd.DataFrame(dict(train_loss=avg_train_losses, test_loss=avg_test_losses)).to_csv( os.path.join(save_dir, 'loss.csv') )
+
+if __main__ == "__name__":
+    bechmark(debug=True)
