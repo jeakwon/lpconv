@@ -138,4 +138,4 @@ if __name__ == "__main__":
         lr=args.lr,
         epochs=args.epochs,
         verbose=args.verbose, 
-        debug=arbs.debug)
+        debug=arbg.debug)
