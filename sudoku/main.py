@@ -1,4 +1,5 @@
 import os
+import argparse
 import numpy as numpy
 import pandas as pd
 
@@ -116,4 +117,25 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../s
         pd.DataFrame(dict(train_loss=avg_train_losses, test_loss=avg_test_losses)).to_csv( os.path.join(save_dir, 'loss.csv') )
 
 if __name__ == "__main__":
-    bechmark(verbose=True, debug=True)
+    parser = argparse.ArgumentParser('', add_help=False)
+    parser.add_argument('--log2p', '-p', type=float, default=None)
+    parser.add_argument('--num-hidden', '-n', type=int, default=512)
+    parser.add_argument('--save-dir', '-sd', type=str, default='../output_dir/sudoku')
+    parser.add_argument('--data-path', '-dp', type=str, default="../sudoku.csv")
+    parser.add_argument('--batch-size', '-bs', type=int, default=100)
+    parser.add_argument('--epochs', '-e', type=int, default=20)
+    parser.add_argument('--lr', '-lr', type=float, default=1e-4)
+    parser.add_argument('--verbose', action='store_true')
+    parser.add_argument('--debug', action='store_true')
+
+    args = parser.parse_args()
+    model = sudoku_lpconv(num_hidden=args.num_hidden, log2p=args.log2p)
+    bechmark(
+        model=model, 
+        save_dir=args.save_dir, 
+        data_path=args.data_path, 
+        batch_size=args.batch_size, 
+        lr=args.lr,
+        epochs=args.epochs,
+        verbose=args.verbose, 
+        debug=arbs.debug)
