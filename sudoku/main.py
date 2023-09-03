@@ -7,7 +7,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 
 from dataset import DatasetInstance, get_sudoku_dataset
-from model import sudoku_lpconv
+from model import sudoku_lpconv, SudokuCNN
 from metrics import eval_num_accs, eval_sudokus
 
 def train(device, train_loader, model, criterion, optimizer, verbose=False, debug=False):
