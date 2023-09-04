@@ -125,6 +125,7 @@ if __name__ == "__main__":
     parser.add_argument('--seed', '-s', type=float, default=0)
     parser.add_argument('--log2p', '-p', type=float, default=None)
     parser.add_argument('--num-hidden', '-n', type=int, default=512)
+    parser.add_argument('--num-layers', '-n', type=int, default=15)
     parser.add_argument('--save-dir', '-sd', type=str, default='../output_dir/sudoku')
     parser.add_argument('--data-path', '-dp', type=str, default="../sudoku.csv")
     parser.add_argument('--batch-size', '-bs', type=int, default=100)
@@ -135,9 +136,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     print(vars(args))
-    
-    model = sudoku_lpconv(num_hidden=args.num_hidden, log2p=args.log2p)
-    save_dir = os.path.join(args.save_dir, f'N={args.num_hidden}', f'log2p={args.log2p}', f'seed={args.seed}')
+
+    model = sudoku_lpconv(num_hidden=args.num_hidden, num_layers=args.num_layers, log2p=args.log2p)
+    save_dir = os.path.join(args.save_dir, f'num_layers={args.num_layers}', f'num_hidden={args.num_hidden}', f'log2p={args.log2p}', f'seed={args.seed}')
     os.makedirs(save_dir, exist_ok=True)
     torch.save(args, os.path.join(save_dir, 'args.pt'))
     bechmark(
