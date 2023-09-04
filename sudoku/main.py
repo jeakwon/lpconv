@@ -76,10 +76,13 @@ def test(device, test_loader, model, criterion, verbose=False, debug=False):
 
     return avg_test_loss, sudoku_test_accs
 
-def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../sudoku.csv', batch_size=100, lr=3e-4, epochs=10, verbose=False, debug=False):
+def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../sudoku.csv', batch_size=100, lr=3e-4, epochs=10, seed=0, verbose=False, debug=False):
+    torch.manual_seed(seed)
+    np.random.seed(seed)
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     train_dataset, test_dataset = get_sudoku_dataset(data_path)
-
+    
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
     test_loader  = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
 
@@ -118,6 +121,7 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../s
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
+    parser.add_argument('--seed', '-s', type=float, default=0)
     parser.add_argument('--log2p', '-p', type=float, default=None)
     parser.add_argument('--num-hidden', '-n', type=int, default=512)
     parser.add_argument('--save-dir', '-sd', type=str, default='../output_dir/sudoku')
@@ -130,12 +134,15 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     model = sudoku_lpconv(num_hidden=args.num_hidden, log2p=args.log2p)
+    save_dir = os.path.join(args.save_dir, f'N={args.num_hidden}, log2p={args.log2p}, seed={args.seed}')
+    os.makedirs(save_dir, exist_ok=True)
     bechmark(
         model=model, 
-        save_dir=args.save_dir, 
+        save_dir=save_dir, 
         data_path=args.data_path, 
         batch_size=args.batch_size, 
         lr=args.lr,
         epochs=args.epochs,
+        seed=args.seed,
         verbose=args.verbose, 
         debug=args.debug)
