@@ -108,7 +108,7 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../s
 
         if avg_test_loss < best_test_loss:
             best_test_loss = avg_test_loss
-            checkpoint_path = os.path.join(save_dir, 'sudoku_cnn_checkpoint.pth')
+            checkpoint_path = os.path.join(save_dir, 'sudoku_cnn_checkpoint.pt')
             torch.save(model.state_dict(), checkpoint_path)
 
         avg_train_acc = ' '.join(f'{sudoku_train_accs.mean()}'.split()[:-2])
@@ -134,9 +134,10 @@ if __name__ == "__main__":
     parser.add_argument('--debug', action='store_true')
 
     args = parser.parse_args()
-    print(vars(args))
     model = sudoku_lpconv(num_hidden=args.num_hidden, log2p=args.log2p)
     save_dir = os.path.join(args.save_dir, f'N={args.num_hidden}', f'log2p={args.log2p}', f'seed={args.seed}')
+    torch.save(args, os.path.join(save_dir, 'args.pt'))
+    print(vars(args))
     os.makedirs(save_dir, exist_ok=True)
     bechmark(
         model=model, 
