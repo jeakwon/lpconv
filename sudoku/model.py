@@ -107,25 +107,15 @@ class Conv2dSame(torch.nn.Module):
         return self.net(x)
 
 class SudokuCNN(nn.Module):
-    def __init__(self, N=256):
+    def __init__(self, N=256, num_layers=15):
         super(SudokuCNN, self).__init__()
-        self.conv_layers = nn.Sequential(Conv2dSame(1,N,3),#1
-                                         Conv2dSame(N,N,3),#2
-                                         Conv2dSame(N,N,3),#3
-                                         Conv2dSame(N,N,3),#4
-                                         Conv2dSame(N,N,3),#5
-                                         Conv2dSame(N,N,3),#6
-                                         Conv2dSame(N,N,3),#7
-                                         Conv2dSame(N,N,3),#8
-                                         Conv2dSame(N,N,3),#9
-                                         Conv2dSame(N,N,3),#10
-                                         Conv2dSame(N,N,3),#11
-                                         Conv2dSame(N,N,3),#12
-                                         Conv2dSame(N,N,3),#13
-                                         Conv2dSame(N,N,3),#14
-                                         Conv2dSame(N,N,3),#15
-        )
+        self.conv_layers = nn.Sequential()
+        N_in, N_out = 1, N
+        for i in range(num_layers):
+            self.conv_layers.append( Conv2dSame(N_in, N_out, 3) )
+            N_in = N
         self.last_conv = nn.Conv2d(N, 9, 1)
+        
     def forward(self, x):
         x = self.conv_layers(x)
         x = self.last_conv(x)
