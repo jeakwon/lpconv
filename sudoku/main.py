@@ -77,6 +77,7 @@ def test(device, test_loader, model, criterion, verbose=False, debug=False):
     return avg_test_loss, sudoku_test_accs
 
 def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../sudoku.csv', batch_size=100, lr=3e-4, epochs=10, seed=0, verbose=False, debug=False):
+
     torch.manual_seed(seed)
     np.random.seed(seed)
 
@@ -133,6 +134,7 @@ if __name__ == "__main__":
     parser.add_argument('--debug', action='store_true')
 
     args = parser.parse_args()
+    print(vars(args))
     model = sudoku_lpconv(num_hidden=args.num_hidden, log2p=args.log2p)
     save_dir = os.path.join(args.save_dir, f'N={args.num_hidden}', f'log2p={args.log2p}', f'seed={args.seed}')
     os.makedirs(save_dir, exist_ok=True)
