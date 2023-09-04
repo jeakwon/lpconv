@@ -134,11 +134,12 @@ if __name__ == "__main__":
     parser.add_argument('--debug', action='store_true')
 
     args = parser.parse_args()
+    print(vars(args))
+    
     model = sudoku_lpconv(num_hidden=args.num_hidden, log2p=args.log2p)
     save_dir = os.path.join(args.save_dir, f'N={args.num_hidden}', f'log2p={args.log2p}', f'seed={args.seed}')
-    torch.save(args, os.path.join(save_dir, 'args.pt'))
-    print(vars(args))
     os.makedirs(save_dir, exist_ok=True)
+    torch.save(args, os.path.join(save_dir, 'args.pt'))
     bechmark(
         model=model, 
         save_dir=save_dir, 
