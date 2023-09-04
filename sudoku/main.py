@@ -134,7 +134,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     model = sudoku_lpconv(num_hidden=args.num_hidden, log2p=args.log2p)
-    save_dir = os.path.join(args.save_dir, f'N={args.num_hidden}, log2p={args.log2p}, seed={args.seed}')
+    save_dir = os.path.join(args.save_dir, f'N={args.num_hidden}', f'log2p={args.log2p}', f'seed={args.seed}')
     os.makedirs(save_dir, exist_ok=True)
     bechmark(
         model=model, 
