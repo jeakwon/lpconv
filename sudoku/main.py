@@ -102,8 +102,8 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../s
     for epoch in range(epochs):
         avg_train_loss, sudoku_train_accs = train(device, train_loader, model, criterion, optimizer, verbose=verbose, debug=debug)
         avg_test_loss, sudoku_test_accs = test(device, test_loader, model, criterion, verbose=verbose, debug=debug)
-        iter_train_accs.append( sudoku_train_accs.mean() )
-        iter_test_accs.append( sudoku_test_accs.mean() )
+        iter_train_accs.append( sudoku_train_accs )
+        iter_test_accs.append( sudoku_test_accs )
         avg_train_accs.append( sudoku_train_accs.mean() )
         avg_test_accs.append( sudoku_test_accs.mean() )
         avg_train_losses.append( avg_train_loss )
@@ -120,8 +120,8 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../s
         print(f'[Epochs: {epoch}/{epochs}] Avg Train Loss: {avg_train_loss:.4f} Avg Train Acc: {avg_train_acc}', flush=True)
         print(f'[Epochs: {epoch}/{epochs}] Avg Test Loss: {avg_test_loss:.4f} Avg Test Acc: {avg_test_acc}', flush=True)
 
-        pd.concat(iter_train_accs).to_csv( os.path.join(save_dir, 'iter_train_accs.csv'))
-        pd.concat(iter_test_accs).to_csv( os.path.join(save_dir, 'iter_test_accs.csv'))
+        pd.concat(iter_train_accs).reset_index(drop=True).to_csv( os.path.join(save_dir, 'iter_train_accs.csv'))
+        pd.concat(iter_test_accs).reset_index(drop=True).to_csv( os.path.join(save_dir, 'iter_test_accs.csv'))
         pd.concat(avg_train_accs, axis=1).T.to_csv( os.path.join(save_dir, 'avg_train_accs.csv'))
         pd.concat(avg_test_accs, axis=1).T.to_csv( os.path.join(save_dir, 'avg_test_accs.csv'))
         pd.DataFrame(dict(train_loss=avg_train_losses, test_loss=avg_test_losses)).to_csv( os.path.join(save_dir, 'loss.csv') )
