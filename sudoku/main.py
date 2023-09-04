@@ -38,7 +38,7 @@ def train(device, train_loader, model, criterion, optimizer, verbose=False, debu
 
         if verbose and (i%100==0):
             avg_acc = ' '.join(f'{sudoku_train_accs.mean()}'.split()[:-2])
-            print(f'[{i}/{len(train_loader)}] Avg Loss: {avg_train_loss:.4f} Avg Acc: {avg_acc}')
+            print(f'[{i}/{len(train_loader)}] Avg Loss: {avg_train_loss:.4f} Avg Acc: {avg_acc}', flush=True)
 
         if debug:
             break
@@ -69,7 +69,7 @@ def test(device, test_loader, model, criterion, verbose=False, debug=False):
 
             if verbose and (i%100==0):
                 avg_acc = ' '.join(f'{sudoku_test_accs.mean()}'.split()[:-2])
-                print(f'[{i}/{len(test_loader)}] Avg Loss: {avg_test_loss:.4f} Avg Acc: {avg_acc}')
+                print(f'[{i}/{len(test_loader)}] Avg Loss: {avg_test_loss:.4f} Avg Acc: {avg_acc}', flush=True)
             
             if debug:
                 break
@@ -113,8 +113,8 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../s
 
         avg_train_acc = ' '.join(f'{sudoku_train_accs.mean()}'.split()[:-2])
         avg_test_acc = ' '.join(f'{sudoku_test_accs.mean()}'.split()[:-2])
-        print(f'[Epochs: {epoch}/{epochs}] Avg Train Loss: {avg_train_loss:.4f} Avg Train Acc: {avg_train_acc}')
-        print(f'[Epochs: {epoch}/{epochs}] Avg Test Loss: {avg_test_loss:.4f} Avg Test Acc: {avg_test_acc}')
+        print(f'[Epochs: {epoch}/{epochs}] Avg Train Loss: {avg_train_loss:.4f} Avg Train Acc: {avg_train_acc}', flush=True)
+        print(f'[Epochs: {epoch}/{epochs}] Avg Test Loss: {avg_test_loss:.4f} Avg Test Acc: {avg_test_acc}', flush=True)
 
         pd.concat(avg_train_accs, axis=1).T.to_csv( os.path.join(save_dir, 'avg_train_accs.csv'))
         pd.concat(avg_test_accs, axis=1).T.to_csv( os.path.join(save_dir, 'avg_test_accs.csv'))
