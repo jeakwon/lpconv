@@ -138,7 +138,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.log2p == -1:
         args.log2p = None
-    if args.loconvert is False:
+    if args.lpconvert is False:
         args.log2p = 'base'
     print(vars(args))
 
