@@ -123,7 +123,7 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../s
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
     parser.add_argument('--seed', '-s', type=int, default=0)
-    parser.add_argument('--log2p', '-p', type=float, default=None)
+    parser.add_argument('--log2p', '-p', type=float, default=-1)
     parser.add_argument('--num-hidden', '-h', type=int, default=512)
     parser.add_argument('--num-layers', '-l', type=int, default=15)
     parser.add_argument('--save-dir', '-sd', type=str, default='../output_dir/sudoku')
@@ -135,6 +135,8 @@ if __name__ == "__main__":
     parser.add_argument('--debug', action='store_true')
 
     args = parser.parse_args()
+    if args.log2p == -1:
+        args.log2p=None
     print(vars(args))
 
     model = sudoku_lpconv(num_hidden=args.num_hidden, num_layers=args.num_layers, log2p=args.log2p)
