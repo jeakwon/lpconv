@@ -137,7 +137,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if args.log2p == -1:
-        args.log2p=None
+        args.log2p = None
+    if args.loconvert is False:
+        args.log2p = 'base'
     print(vars(args))
 
     model = sudoku_lpconv(num_hidden=args.num_hidden, num_layers=args.num_layers, log2p=args.log2p, lpconvert=args.lpconvert)
