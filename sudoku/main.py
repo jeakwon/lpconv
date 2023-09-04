@@ -133,13 +133,14 @@ if __name__ == "__main__":
     parser.add_argument('--lr', '-lr', type=float, default=1e-4)
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--debug', action='store_true')
+    parser.add_argument('--lpconvert', action='store_true')
 
     args = parser.parse_args()
     if args.log2p == -1:
         args.log2p=None
     print(vars(args))
 
-    model = sudoku_lpconv(num_hidden=args.num_hidden, num_layers=args.num_layers, log2p=args.log2p)
+    model = sudoku_lpconv(num_hidden=args.num_hidden, num_layers=args.num_layers, log2p=args.log2p, lpconvert=args.lpconvert)
     save_dir = os.path.join(args.save_dir, f'num_layers={args.num_layers}', f'num_hidden={args.num_hidden}', f'log2p={args.log2p}', f'seed={args.seed}')
     os.makedirs(save_dir, exist_ok=True)
     torch.save(args, os.path.join(save_dir, 'args.pt'))
