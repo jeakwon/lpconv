@@ -102,8 +102,8 @@ def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../s
     for epoch in range(epochs):
         avg_train_loss, sudoku_train_accs = train(device, train_loader, model, criterion, optimizer, verbose=verbose, debug=debug)
         avg_test_loss, sudoku_test_accs = test(device, test_loader, model, criterion, verbose=verbose, debug=debug)
-        iter_train_accs.append( sudoku_train_accs )
-        iter_test_accs.append( sudoku_test_accs )
+        iter_train_accs.append( sudoku_train_accs.mean() )
+        iter_test_accs.append( sudoku_test_accs.mean() )
         avg_train_accs.append( sudoku_train_accs.mean() )
         avg_test_accs.append( sudoku_test_accs.mean() )
         avg_train_losses.append( avg_train_loss )
