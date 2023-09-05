@@ -121,8 +121,8 @@ class SudokuCNN(nn.Module):
         x = self.last_conv(x)
         return x
 
-def sudoku_lpconv(num_hidden=512, num_layers=15, log2p=None, lpconvert=True):
+def sudoku_lpconv(num_hidden=512, num_layers=15, log2p=None, lpconvert=True, learnable=True):
     model = SudokuCNN(num_hidden=num_hidden, num_layers=num_layers)
     if lpconvert:
-        return LpConvert(model, log2p=log2p)
+        return LpConvert(model, log2p=log2p, set_requires_grad=dict(log2p=learnable, C=learnable))
     return model
