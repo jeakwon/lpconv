@@ -23,7 +23,10 @@ def train(device, train_loader, model, criterion, optimizer, verbose=False, debu
 
         optimizer.zero_grad()
         loss.backward()
-        nn.utils.clip_grad_norm_(model.parameters(), 1)
+        for name, param in model.named_parameters():
+            if 'log2p' in name:
+                param.data.clamp_(min=1) # for numerical stability
+
         optimizer.step()
 
         loss_sum += loss.item()

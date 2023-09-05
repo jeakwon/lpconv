@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.functional import _pair
 
-
 class LpConv2d(nn.Conv2d):
     def __init__(self, in_channels, out_channels, sigma, log2p, kernel_size,
                  stride=1, padding=0, bias=True, *args, **kwargs):
