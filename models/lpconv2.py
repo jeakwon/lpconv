@@ -75,8 +75,8 @@ def lp_convolution(input, out_channels, weight, bias, C, log2p, kernel_size, str
     if constraints:
         C_00 = torch.clamp(C[:, 0, 0], min=1e-4)
         C_11 = torch.clamp(C[:, 1, 1], min=1e-4)
-        C_01 = torch.max(C[:, 1, 1], torch.sqrt( C_00 * C_11 ))
-        C_10 = torch.max(C[:, 1, 1], torch.sqrt( C_00 * C_11 ))
+        C_01 = torch.max(C[:, 0, 1], torch.sqrt( C_00 * C_11 ))
+        C_10 = torch.max(C[:, 1, 0], torch.sqrt( C_00 * C_11 ))
         C[:, 0, 0].data.fill_(C_00)
         C[:, 1, 1].data.fill_(C_11)
         C[:, 0, 1].data.fill_(C_01)
