@@ -59,7 +59,7 @@ class LpConv2d(nn.Conv2d):
 
         return new_conv2d
 
-def lp_convolution(input, out_channels, weight, bias, C, log2p, kernel_size, stride, padding, dilation, groups):
+def lp_convolution(input, out_channels, weight, bias, C, log2p, kernel_size, stride, padding, dilation, groups, constraints=False):
     if log2p is None:
         return F.conv2d(input, weight, bias, stride, padding, dilation, groups)
 
@@ -72,10 +72,15 @@ def lp_convolution(input, out_channels, weight, bias, C, log2p, kernel_size, str
     offset = torch.stack( [xx - x0, yy - y0] )
 
     # set bounds and constraints to keep C symmetric and positive definite
-    C[:, 0, 0].data = C_00 = torch.clamp(C[:, 0, 0], min=1e-4)
-    C[:, 1, 1].data = C_11 = torch.clamp(C[:, 1, 1], min=1e-4)
-    C[:, 0, 1].data = C_01 = torch.max(C[:, 1, 1], torch.sqrt( C_00 * C_11 ))
-    C[:, 1, 0].data = C_10 = torch.max(C[:, 1, 1], torch.sqrt( C_00 * C_11 ))
+    if constraints:
+        C_00 = torch.clamp(C[:, 0, 0], min=1e-4)
+        C_11 = torch.clamp(C[:, 1, 1], min=1e-4)
+        C_01 = torch.max(C[:, 1, 1], torch.sqrt( C_00 * C_11 ))
+        C_10 = torch.max(C[:, 1, 1], torch.sqrt( C_00 * C_11 ))
+        C[:, 0, 0].data.fill_(C_00)
+        C[:, 1, 1].data.fill_(C_11)
+        C[:, 0, 1].data.fill_(C_01)
+        C[:, 1, 0].data.fill_(C_10)
 
     Z = torch.einsum('cij, jmn -> cimn', C, offset).abs()
     mask = torch.exp( - Z.pow( 2**log2p[:, None, None, None] ).sum(dim=1, keepdim=True) )
