@@ -48,11 +48,15 @@ if __name__ == "__main__":
 
         new_model = sudoku_lpconv(num_hidden=exp_args.num_hidden, num_layers=exp_args.num_layers, log2p=args.new_log2p, lpconvert=exp_args.lpconvert, learnable=(not exp_args.lpfrozen))
         for name, new_p in new_model.named_parameters():
-            old_p = old_model.get_parameter(name)
-            if 'weight' in name:
-                new_p.data = old_p.data
-            if 'bias' in name:
-                new_p.data = old_p.data
+            try:
+                old_p = old_model.get_parameter(name)
+                if 'weight' in name:
+                    new_p.data = old_p.data
+                if 'bias' in name:
+                    new_p.data = old_p.data
+            except Exception as e: 
+                print(e)
+                
 
         bechmark(new_model, save_dir=args.save_dir, data_path=args.data_path, batch_size=args.batch_size, lr=args.lr, seed=exp_args.seed, verbose=args.verbose, debug=args.debug)
         # for name, p in new_model.named_parameters():
