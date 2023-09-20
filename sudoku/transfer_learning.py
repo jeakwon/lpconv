@@ -24,14 +24,14 @@ def list_experiments(directory):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
-    parser.add_argument('-d', '--directory', type=str, default=r'sudoku/num_layers=10/num_hidden=256/log2p=1.0/', help='Directory path')
+    parser.add_argument('-d', '--directory', type=str, default=r'sudoku/num_layers=10/num_hidden=256/log2p=None/', help='Directory path')
     args = parser.parse_args()
 
     print(vars(args), flush=True)
 
     experiments = list_experiments(args.directory)
     print(experiments.keys(), flush=True)
-    
+
     # parser.add_argument('--seed', '-s', type=int, default=0)
     # parser.add_argument('--log2p', '-p', type=float, default=-1)
     # parser.add_argument('--num-hidden', '-h', type=int, default=512)
