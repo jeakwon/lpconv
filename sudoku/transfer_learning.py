@@ -58,7 +58,7 @@ if __name__ == "__main__":
                 print(e)
                 
 
-        bechmark(new_model, save_dir=args.save_dir, data_path=args.data_path, batch_size=args.batch_size, lr=args.lr, seed=exp_args.seed, verbose=args.verbose, debug=args.debug)
+        benchmark(new_model, save_dir=args.save_dir, data_path=args.data_path, batch_size=args.batch_size, lr=args.lr, seed=exp_args.seed, verbose=args.verbose, debug=args.debug)
         # for name, p in new_model.named_parameters():
         #     print(p)
 
