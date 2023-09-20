@@ -80,7 +80,7 @@ def test(device, test_loader, model, criterion, verbose=False, debug=False):
 
     return avg_test_loss, sudoku_test_accs
 
-def bechmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../sudoku.csv', batch_size=100, lr=3e-4, epochs=10, seed=0, verbose=False, debug=False):
+def benchmark(model=SudokuCNN(), save_dir='../output_dir/sudoku', data_path='../sudoku.csv', batch_size=100, lr=3e-4, epochs=10, seed=0, verbose=False, debug=False):
     # torch.autograd.set_detect_anomaly(True)
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     save_dir = os.path.join(args.save_dir, f'num_layers={args.num_layers}', f'num_hidden={args.num_hidden}', f'log2p={args.log2p}', f'seed={args.seed}')
     os.makedirs(save_dir, exist_ok=True)
     torch.save(args, os.path.join(save_dir, 'args.pt'))
-    bechmark(
+    benchmark(
         model=model, 
         save_dir=save_dir, 
         data_path=args.data_path, 

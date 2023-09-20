@@ -14,9 +14,11 @@ from main import train, test, benchmark
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
-    parser.add_argument('--checkpoint-dir', '-cd', type=str)
+    parser.add_argument('--load-dir', '-d', type=str)
     args = parser.parse_args()
+
     print(vars(args))
+    print(args.load_dir)
 
     # parser.add_argument('--seed', '-s', type=int, default=0)
     # parser.add_argument('--log2p', '-p', type=float, default=-1)
