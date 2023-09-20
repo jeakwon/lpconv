@@ -12,14 +12,26 @@ from model import sudoku_lpconv, SudokuCNN
 from metrics import eval_num_accs, eval_sudokus
 from main import train, test, benchmark
 
+def list_experiments(directory):
+    experiments = {}
+    for dirpath, dirnames, filenames in os.walk(directory):
+        if 'args.pt' in os.listdir(dirpath):
+            experiments[dirpath] = {}
+            experiments[dirpath]['args'] = torch.load(os.path.join(dirpath, 'args.pt'), map_location='cpu')
+            experiments[dirpath]['checkpoint']=torch.load(os.path.join(dirpath, 'sudoku_cnn_checkpoint.pt'), map_location='cpu')
+    print(experiments.keys(), flush=True)
+    return experiments
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
-    parser.add_argument('--load-dir', '-d', type=str)
+    parser.add_argument('-d', '--directory', type=str, default=r'sudoku/num_layers=10/num_hidden=256/log2p=1.0/', help='Directory path')
     args = parser.parse_args()
 
-    print(vars(args))
-    print(args.load_dir)
+    print(vars(args), flush=True)
 
+    experiments = list_experiments(args.directory)
+    print(experiments.keys(), flush=True)
+    
     # parser.add_argument('--seed', '-s', type=int, default=0)
     # parser.add_argument('--log2p', '-p', type=float, default=-1)
     # parser.add_argument('--num-hidden', '-h', type=int, default=512)
