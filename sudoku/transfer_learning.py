@@ -24,7 +24,7 @@ def list_experiments(directory):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
-    parser.add_argument('-d', '--directory', type=str, default=r'sudoku/num_layers=10/num_hidden=256/log2p=None/', help='Directory path')
+    parser.add_argument('-d', '--directory', type=str, default=r'/mnt/lustre/ibs/jeakwon/project2023/lpconv/output_dir/sudoku/num_layers=10/num_hidden=256/log2p=None/', help='Directory path')
     args = parser.parse_args()
 
     print(vars(args), flush=True)
