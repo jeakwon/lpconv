@@ -43,7 +43,7 @@ if __name__ == "__main__":
         for name, p in new_model.named_parameters():
             old_p = old_model.get_parameter(name)
             print('before!!!', new_model.get_parameter(name))
-            new_model.set_parameter(name, old_p)
+            setattr(new_model, name, old_p)
             new_p = new_model.get_parameter(name)
             print('after', new_model.get_parameter(name))
             break
