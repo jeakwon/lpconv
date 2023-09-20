@@ -26,6 +26,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
     parser.add_argument('-d', '--directory', type=str, default=r'/mnt/lustre/ibs/jeakwon/project2023/lpconv/output_dir/sudoku/num_layers=10/num_hidden=256/log2p=None/', help='Directory path')
     parser.add_argument('--new-log2p', type=int, default=1)
+    parser.add_argument('--save-dir', '-sd', type=str, default=r'/mnt/lustre/ibs/jeakwon/project2023/lpconv/output_dir/sudoku_transfer_learning')
+    parser.add_argument('--data-path', '-dp', type=str, default=r'/mnt/lustre/ibs/jeakwon/project2023/lpconv/sudoku.csv')
+    parser.add_argument('--batch-size', '-bs', type=int, default=100)
+    parser.add_argument('--epochs', '-e', type=int, default=10)
+    parser.add_argument('--lr', '-lr', type=float, default=1e-4)
+    parser.add_argument('--verbose', action='store_true')
+    parser.add_argument('--debug', action='store_true')
     args = parser.parse_args()
 
     print(vars(args), flush=True)
@@ -43,15 +50,11 @@ if __name__ == "__main__":
         for name, new_p in new_model.named_parameters():
             old_p = old_model.get_parameter(name)
             if 'weight' in name:
-                print(name, new_p)
                 new_p.data = old_p.data
-                print(name, new_p)
             if 'bias' in name:
-                print(name, new_p)
                 new_p.data = old_p.data
-                print(name, new_p)
-            break
 
+        bechmark(new_model, save_dir=args.save_dir, data_path=args.data_path, batch_size=args.batch_size, lr=args.lr, seed=exp_args.seed, verbose=args.verbose, debug=args.debug)
         # for name, p in new_model.named_parameters():
         #     print(p)
 
