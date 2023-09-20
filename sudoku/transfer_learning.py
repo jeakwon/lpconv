@@ -41,10 +41,10 @@ if __name__ == "__main__":
 
         new_model = sudoku_lpconv(num_hidden=exp_args.num_hidden, num_layers=exp_args.num_layers, log2p=args.new_log2p, lpconvert=exp_args.lpconvert, learnable=(not exp_args.lpfrozen))
         
-        for p in old_model.named_parameters():
-            print(p)
-        for p in new_model.named_parameters():
-            print(p)
+        for name, p in old_model.named_parameters():
+            print(new_model.get_parameter(name))
+        # for name, p in new_model.named_parameters():
+        #     print(p)
 
 
     # parser.add_argument('--seed', '-s', type=int, default=0)
