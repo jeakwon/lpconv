@@ -40,12 +40,16 @@ if __name__ == "__main__":
         old_model.load_state_dict(checkpoint)
 
         new_model = sudoku_lpconv(num_hidden=exp_args.num_hidden, num_layers=exp_args.num_layers, log2p=args.new_log2p, lpconvert=exp_args.lpconvert, learnable=(not exp_args.lpfrozen))
-        for name, p in new_model.named_parameters():
+        for name, new_p in new_model.named_parameters():
             old_p = old_model.get_parameter(name)
-            print('before!!!', new_model.get_parameter(name))
-            setattr(new_model, name, old_p)
-            new_p = new_model.get_parameter(name)
-            print('after', new_model.get_parameter(name))
+            if 'weight' in name:
+                print(name, new_p)
+                new_p.data = old_p.data
+                print(name, new_p)
+            if 'bias' in name:
+                print(name, new_p)
+                new_p.data = old_p.data
+                print(name, new_p)
             break
 
         # for name, p in new_model.named_parameters():
