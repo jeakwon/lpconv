@@ -42,12 +42,12 @@ if __name__ == "__main__":
         new_model = sudoku_lpconv(num_hidden=exp_args.num_hidden, num_layers=exp_args.num_layers, log2p=args.new_log2p, lpconvert=exp_args.lpconvert, learnable=(not exp_args.lpfrozen))
         for name, p in new_model.named_parameters():
             old_p = old_model.get_parameter(name)
-            print(new_model.get_parameter(name))
+            print('before!!!', new_model.get_parameter(name))
             new_model.set_parameter(name, old_p)
             new_p = new_model.get_parameter(name)
-            print(new_model.get_parameter(name))
+            print('after', new_model.get_parameter(name))
             break
-            
+
         # for name, p in new_model.named_parameters():
         #     print(p)
 
