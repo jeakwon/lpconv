@@ -25,12 +25,25 @@ def list_experiments(directory):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
     parser.add_argument('-d', '--directory', type=str, default=r'/mnt/lustre/ibs/jeakwon/project2023/lpconv/output_dir/sudoku/num_layers=10/num_hidden=256/log2p=None/', help='Directory path')
+    parser.add_argument('--new-log2p', type=int, default=1)
     args = parser.parse_args()
 
     print(vars(args), flush=True)
 
     experiments = list_experiments(args.directory)
     print(experiments.keys(), flush=True)
+
+    for dirpath in experiments.keys():
+        exp_args = experiments[dirpath]['args']
+        checkpoint = experiments[dirpath]['checkpoint']
+        old_model = sudoku_lpconv(num_hidden=exp_args.num_hidden, num_layers=exp_args.num_layers, log2p=exp_args.log2p, lpconvert=exp_args.lpconvert, learnable=(not exp_args.lpfrozen))
+        old_model.load_state_dict(checkpoint)
+
+        new_model = sudoku_lpconv(num_hidden=exp_args.num_hidden, num_layers=exp_args.num_layers, log2p=args.new_log2p, lpconvert=exp_args.lpconvert, learnable=(not exp_args.lpfrozen))
+        
+        print(old_model.parameters())
+        print(new_model.parameters())
+
 
     # parser.add_argument('--seed', '-s', type=int, default=0)
     # parser.add_argument('--log2p', '-p', type=float, default=-1)
