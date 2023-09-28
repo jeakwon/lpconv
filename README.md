@@ -1,3 +1,19 @@
+# Welcome to Our Project Repository!
+
+Thank you for visiting our code repository for Lp-Convolution! We are excited to share our work with the community and welcome any feedback or questions you might have.
+
+Please note that we are currently in the process of organizing and refining this repository to ensure that it is as user-friendly and informative as possible. We apologize for any inconvenience this may cause and appreciate your understanding and patience as we work to improve the repository.
+
+We are actively working on updating and optimizing the codebase, documentation, and other resources, and we aim to have a more organized version available as soon as possible.
+
+In the meantime, if you have any questions, concerns, or need clarification on any aspect of the project, please do not hesitate to raise an issue or contact us directly. We value your input and are committed to addressing any inquiries promptly.
+
+Thank you once again for your interest in our work, and we look forward to your valuable feedback!
+
+Best regards, 
+Authors
+
+
 ### Acknowledgement
 This code is based on [CycleMLP ICLR 2022](https://github.com/ShoufaChen/CycleMLP), [DeiT](https://github.com/facebookresearch/deit) and [pytorch-image-models](https://github.com/rwightman/pytorch-image-models).
 
@@ -19,26 +35,8 @@ pip install -e .
 
 ### Data preparation
 
-Download and extract ImageNet-1k train and val images from http://image-net.org/.
-(For tiny imagenet, download http://cs231n.stanford.edu/tiny-imagenet-200.zip.
-and additionally run val_format.py for validation set.)
-The directory structure is:
+For tiny imagenet, download http://cs231n.stanford.edu/tiny-imagenet-200.zip. run val_format.py for validation set.
 
-```
-│path/to/imagenet/
-├──train/
-│  ├── n01440764
-│  │   ├── n01440764_10026.JPEG
-│  │   ├── n01440764_10027.JPEG
-│  │   ├── ......
-│  ├── ......
-├──val/
-│  ├── n01440764
-│  │   ├── ILSVRC2012_val_00000293.JPEG
-│  │   ├── ILSVRC2012_val_00002138.JPEG
-│  │   ├── ......
-│  ├── ......
-```
 
 ### Training
 To train on Tiny ImageNet on a single node with 4 gpus for 300 epochs run:
