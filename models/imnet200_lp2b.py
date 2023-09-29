@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torchvision.models as models
 from timm.models.registry import register_model
-from .lpconv2 import LpConvert
+from .lpconv import LpConvert
 
 # AlexNet
 @register_model

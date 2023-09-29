@@ -8,13 +8,20 @@ class LpConv2d(nn.Conv2d):
                  stride=1, padding=0, bias=True, *args, **kwargs):
         super(LpConv2d, self).__init__(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size,
                                        stride=stride, padding=padding, bias=bias, *args, **kwargs)
- 
-        self.theta =  nn.Parameter( torch.pi/2 * torch.rand( out_channels ) )
-        self.sigma = nn.Parameter( torch.Tensor(_pair(sigma)).repeat(out_channels, 1) )
-        self.log2p = nn.Parameter( torch.Tensor([log2p]).repeat(out_channels) )
+
+        sigma = _pair(sigma)
+        C_00 = 1 / (sigma[0] + 1e-4)
+        C_11 = 1 / (sigma[1] + 1e-4)
+        if log2p is None:
+            self.register_buffer('log2p', None)
+            self.register_buffer('C', None)
+        else:
+            self.log2p = nn.Parameter( torch.Tensor([log2p]).repeat(out_channels) )
+            self.C = nn.Parameter( torch.Tensor( [[C_00, 0], [0, C_11]] ).repeat(out_channels, 1, 1) )
 
     def forward(self, input):
-        return lp_convolution(input, self.out_channels, self.weight, self.bias, self.sigma, self.theta, self.log2p, self.kernel_size, self.stride, self.padding, self.dilation, self.groups)
+        return lp_convolution(input, self.out_channels, self.weight, self.bias, self.C, self.log2p, 
+        self.kernel_size, self.stride, self.padding, self.dilation, self.groups)
 
     def set_requires_grad(self, **params):
         for param, requires_grad in params.items():
@@ -23,7 +30,7 @@ class LpConv2d(nn.Conv2d):
             print(f'{param}.requires_grad = {requires_grad}')
 
     @classmethod
-    def convert(cls, conv2d, log2p, sigma_to_kernel_ratio=0.5, transfer_params=False, set_requires_grad={}):
+    def convert(cls, conv2d, log2p, transfer_params=False, set_requires_grad={}):
         in_channels=conv2d.in_channels
         out_channels=conv2d.out_channels
         kernel_size=(conv2d.kernel_size[0]*2 + conv2d.kernel_size[0]%2,
@@ -35,7 +42,7 @@ class LpConv2d(nn.Conv2d):
         groups=conv2d.groups
         padding_mode=conv2d.padding_mode
         bias=conv2d.bias is not None
-        sigma=(conv2d.kernel_size[0] * sigma_to_kernel_ratio, conv2d.kernel_size[1] * sigma_to_kernel_ratio)
+        sigma=(conv2d.kernel_size[0] * 0.5, conv2d.kernel_size[1] * 0.5)
 
         new_conv2d = cls(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, stride=stride, padding=padding,
                         dilation=dilation, groups=groups, padding_mode=padding_mode, bias=bias, sigma=sigma, log2p=log2p)
@@ -52,8 +59,11 @@ class LpConv2d(nn.Conv2d):
 
         return new_conv2d
 
-def lp_convolution(input, out_channels, weight, bias, sigma, theta, log2p, kernel_size, stride, padding, dilation, groups):
-
+def lp_convolution(input, out_channels, weight, bias, C, log2p, kernel_size, stride, padding, dilation, groups, constraints=False):
+    if log2p is None:
+        return F.conv2d(input, weight, bias, stride, padding, dilation, groups)
+        
+    # offsets from kernel center
     x = torch.arange( kernel_size[0] ).to(input.device)
     y = torch.arange( kernel_size[1] ).to(input.device)
     xx, yy = torch.meshgrid(x, y)
@@ -61,21 +71,16 @@ def lp_convolution(input, out_channels, weight, bias, sigma, theta, log2p, kerne
     y0 = (y.max()-y.min())/2
     offset = torch.stack( [xx - x0, yy - y0] )
 
-    D = torch.zeros(out_channels, 2, 2).to(input.device)
-    D[:, 0, 0] = 1 / ( sigma[:, 0] + 1e-4 )
-    D[:, 1, 1] = 1 / ( sigma[:, 1] + 1e-4 )
-
-    theta.data = torch.remainder( theta, 2 * torch.pi )
-    sin = torch.sin(theta)
-    cos = torch.cos(theta)
-
-    R = torch.zeros(out_channels, 2, 2).to(input.device)
-    R[:, 0, 0] =  cos
-    R[:, 0, 1] = -sin
-    R[:, 1, 0] =  sin
-    R[:, 1, 1] =  cos
-
-    C = torch.einsum('cij, cjk -> cik', D, R)
+    # set bounds and constraints to keep C symmetric and positive definite
+    if constraints:
+        C_00 = torch.clamp(C[:, 0, 0], min=1e-4)
+        C_11 = torch.clamp(C[:, 1, 1], min=1e-4)
+        C_01 = torch.max(C[:, 0, 1], torch.sqrt( C_00 * C_11 ))
+        C_10 = torch.max(C[:, 1, 0], torch.sqrt( C_00 * C_11 ))
+        C[:, 0, 0].data.fill_(C_00)
+        C[:, 1, 1].data.fill_(C_11)
+        C[:, 0, 1].data.fill_(C_01)
+        C[:, 1, 0].data.fill_(C_10)
 
     Z = torch.einsum('cij, jmn -> cimn', C, offset).abs()
     mask = torch.exp( - Z.pow( 2**log2p[:, None, None, None] ).sum(dim=1, keepdim=True) )
