@@ -1,3 +1,4 @@
+"""Lp-Conv p=8 in CIFAR-100"""
 import torch
 import torch.nn as nn
 import torchvision.models as models

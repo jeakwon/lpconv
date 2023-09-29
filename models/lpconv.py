@@ -72,7 +72,7 @@ def lp_convolution(input, out_channels, weight, bias, C, log2p, kernel_size, str
     offset = torch.stack( [xx - x0, yy - y0] )
 
     # set bounds and constraints to keep C symmetric and positive definite
-    if constraints:
+    if constraints: # was not applied in the paper
         C_00 = torch.clamp(C[:, 0, 0], min=1e-4)
         C_11 = torch.clamp(C[:, 1, 1], min=1e-4)
         C_01 = torch.max(C[:, 0, 1], torch.sqrt( C_00 * C_11 ))

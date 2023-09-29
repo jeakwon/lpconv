@@ -1,3 +1,4 @@
+"""frozen Lp-Conv p=256 in TinyImageNet"""
 import torch
 import torch.nn as nn
 import torchvision.models as models

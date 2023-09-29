@@ -1,3 +1,4 @@
+"""Lp-Conv p=4 in TinyImageNet"""
 import torch
 import torch.nn as nn
 import torchvision.models as models
