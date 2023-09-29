@@ -24,10 +24,10 @@ def list_experiments(directory):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('', add_help=False)
-    parser.add_argument('-d', '--directory', type=str, default=r'/mnt/lustre/ibs/jeakwon/project2023/lpconv/output_dir/sudoku/num_layers=10/num_hidden=256/log2p=None/', help='Directory path')
+    parser.add_argument('-d', '--directory', type=str, default=r'/mnt/lustre/institute/user/project2023/lpconv/output_dir/sudoku/num_layers=10/num_hidden=256/log2p=None/', help='Directory path')
     parser.add_argument('--new-log2p', type=int, default=1)
-    parser.add_argument('--save-dir', '-sd', type=str, default=r'/mnt/lustre/ibs/jeakwon/project2023/lpconv/output_dir/sudoku_transfer_learning')
-    parser.add_argument('--data-path', '-dp', type=str, default=r'/mnt/lustre/ibs/jeakwon/project2023/lpconv/sudoku.csv')
+    parser.add_argument('--save-dir', '-sd', type=str, default=r'/mnt/lustre/institute/user/project2023/lpconv/output_dir/sudoku_transfer_learning')
+    parser.add_argument('--data-path', '-dp', type=str, default=r'/mnt/lustre/institute/user/project2023/lpconv/sudoku.csv')
     parser.add_argument('--batch-size', '-bs', type=int, default=100)
     parser.add_argument('--epochs', '-e', type=int, default=10)
     parser.add_argument('--lr', '-lr', type=float, default=1e-4)
