@@ -1,5 +1,4 @@
 from .lpconv import *
-from .lpconv2 import *
 
 from .cifar100 import *
 from .cifar100_lp import *
