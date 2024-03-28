@@ -146,3 +146,17 @@ def convnext_small_imnet200(pretrained=False, **kwargs):
 def convnext_tiny_imnet200(pretrained=False, **kwargs):
     model = models.convnext_tiny(pretrained=pretrained, num_classes=200)
     return model
+
+# ViT
+@register_model
+def vit_ti_imnet200(pretrained=False, **kwargs):
+    model = models.VisionTransformer(
+        image_size=224,
+        patch_size=16,
+        num_layers=12,
+        num_heads=3,
+        hidden_dim=192,
+        mlp_dim=768,
+        num_classes=200
+    )
+    return model
