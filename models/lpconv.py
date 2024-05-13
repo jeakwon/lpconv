@@ -50,7 +50,8 @@ class LpConv2d(nn.Conv2d):
         if transfer_params:
             k0 = conv2d.kernel_size[0]//2+conv2d.kernel_size[0]%2
             k1 = conv2d.kernel_size[1]//2+conv2d.kernel_size[1]%2
-
+            
+            new_conv2d.weight.data = torch.zeros_like(new_conv2d.weight.data)
             new_conv2d.weight.data[:, :, k0:-k0, k1:-k1] = conv2d.weight.data
             if bias:
                 new_conv2d.bias.data = conv2d.bias
