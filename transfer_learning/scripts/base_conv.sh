@@ -16,7 +16,7 @@ do
     --dataset-config-file configs/datasets/${DATASET}.yaml \
     --config-file configs/trainers/BASE_CONV/convnextv2.yaml \
     --output-dir /data1/lsj9862/lpconv/transfer_learning/exp_result/${DATASET}_${SHOTS}shot/seed${SEED}/BASE_CONV \
-    --eval-only \
+    --use_wandb \
     TRAIN.CHECKPOINT_FREQ 500 \
     DATASET.NUM_SHOTS ${SHOTS} \
     DATASET.SUBSAMPLE_CLASSES all
