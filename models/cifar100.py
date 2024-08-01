@@ -164,7 +164,7 @@ def convnext_tiny_cifar100(pretrained=False, **kwargs):
 
 # ViT
 @register_model
-def vit_ti_cifar100(pretrained=False, **kwargs):
+def vit_t_16_cifar100(pretrained=False, **kwargs):
     model = models.VisionTransformer(
         image_size=32,
         patch_size=4,
@@ -174,4 +174,29 @@ def vit_ti_cifar100(pretrained=False, **kwargs):
         mlp_dim=768,
         num_classes=100
     )
+    return model
+
+@register_model
+def vit_b_16_cifar100(pretrained=False, **kwargs):
+    model = models.vit_b_16(num_classes=100)
+    return model
+
+@register_model
+def vit_b_32_cifar100(pretrained=False, **kwargs):
+    model = models.vit_b_32(num_classes=100)
+    return model
+
+@register_model
+def vit_l_16_cifar100(pretrained=False, **kwargs):
+    model = models.vit_l_16(num_classes=100)
+    return model
+
+@register_model
+def vit_l_32_cifar100(pretrained=False, **kwargs):
+    model = models.vit_l_32(num_classes=100)
+    return model
+
+@register_model
+def vit_h_14_cifar100(pretrained=False, **kwargs):
+    model = models.vit_h_14(num_classes=100)
     return model

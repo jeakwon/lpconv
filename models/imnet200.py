@@ -149,7 +149,7 @@ def convnext_tiny_imnet200(pretrained=False, **kwargs):
 
 # ViT
 @register_model
-def vit_ti_imnet200(pretrained=False, **kwargs):
+def vit_t_16_imnet200(pretrained=False, **kwargs):
     model = models.VisionTransformer(
         image_size=224,
         patch_size=16,
@@ -159,4 +159,29 @@ def vit_ti_imnet200(pretrained=False, **kwargs):
         mlp_dim=768,
         num_classes=200
     )
+    return model
+
+@register_model
+def vit_b_16_imnet200(pretrained=False, **kwargs):
+    model = models.vit_b_16(num_classes=200)
+    return model
+
+@register_model
+def vit_b_32_imnet200(pretrained=False, **kwargs):
+    model = models.vit_b_32(num_classes=200)
+    return model
+
+@register_model
+def vit_l_16_imnet200(pretrained=False, **kwargs):
+    model = models.vit_l_16(num_classes=200)
+    return model
+
+@register_model
+def vit_l_32_imnet200(pretrained=False, **kwargs):
+    model = models.vit_l_32(num_classes=200)
+    return model
+
+@register_model
+def vit_h_14_imnet200(pretrained=False, **kwargs):
+    model = models.vit_h_14(num_classes=200)
     return model
