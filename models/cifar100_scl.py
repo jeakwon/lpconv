@@ -48,7 +48,7 @@ class LpConv2d(nn.Conv2d):
         groups=conv2d.groups
         padding_mode=conv2d.padding_mode
         bias=conv2d.bias is not None
-        sigma=(conv2d.kernel_size[0] / scale, conv2d.kernel_size[1] / scale)
+        sigma=(conv2d.kernel_size[0] * 0.5, conv2d.kernel_size[1] * 0.5)
 
         new_conv2d = cls(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size, stride=stride, padding=padding,
                         dilation=dilation, groups=groups, padding_mode=padding_mode, bias=bias, sigma=sigma, log2p=log2p)
