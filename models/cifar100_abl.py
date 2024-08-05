@@ -165,7 +165,8 @@ def abl1234_resnet18_cifar100(pretrained=False, **kwargs):
         layer = resnet18_conv_layers[target]
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
-    
+
+@register_model    
 def abl0234_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
@@ -176,7 +177,8 @@ def abl0234_resnet18_cifar100(pretrained=False, **kwargs):
         layer = resnet18_conv_layers[target]
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
-    
+
+@register_model    
 def abl0134_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
@@ -188,6 +190,7 @@ def abl0134_resnet18_cifar100(pretrained=False, **kwargs):
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
 
+@register_model
 def abl0124_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
@@ -199,6 +202,7 @@ def abl0124_resnet18_cifar100(pretrained=False, **kwargs):
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
 
+@register_model
 def abl0123_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
@@ -210,6 +214,7 @@ def abl0123_resnet18_cifar100(pretrained=False, **kwargs):
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
 
+@register_model
 def abl0_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
@@ -221,6 +226,7 @@ def abl0_resnet18_cifar100(pretrained=False, **kwargs):
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
 
+@register_model
 def abl1_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
@@ -232,6 +238,7 @@ def abl1_resnet18_cifar100(pretrained=False, **kwargs):
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
 
+@register_model
 def abl2_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
@@ -243,6 +250,7 @@ def abl2_resnet18_cifar100(pretrained=False, **kwargs):
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
 
+@register_model
 def abl3_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
@@ -254,6 +262,7 @@ def abl3_resnet18_cifar100(pretrained=False, **kwargs):
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
 
+@register_model
 def abl4_resnet18_cifar100(pretrained=False, **kwargs):
     model = models.resnet18(pretrained=pretrained, num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
