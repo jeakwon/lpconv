@@ -46,3 +46,24 @@ def flp3_vgg16_bn_imnet200(pretrained=False, **kwargs):
 def flp4_vgg16_bn_imnet200(pretrained=False, **kwargs):
     model = models.vgg16_bn(pretrained=pretrained, num_classes=200)
     return LpConvert(model, log2p=4, set_requires_grad=dict(log2p=False))
+
+# ResNet-18
+@register_model
+def flp1_resnet18_imnet200(pretrained=False, **kwargs):
+    model = models.resnet18(pretrained=pretrained, num_classes=200)
+    return LpConvert(model, log2p=1, set_requires_grad=dict(log2p=False))
+
+@register_model
+def flp2_resnet18_imnet200(pretrained=False, **kwargs):
+    model = models.resnet18(pretrained=pretrained, num_classes=200)
+    return LpConvert(model, log2p=2, set_requires_grad=dict(log2p=False))
+
+@register_model
+def flp3_resnet18_imnet200(pretrained=False, **kwargs):
+    model = models.resnet18(pretrained=pretrained, num_classes=200)
+    return LpConvert(model, log2p=3, set_requires_grad=dict(log2p=False))
+
+@register_model
+def flp4_resnet18_imnet200(pretrained=False, **kwargs):
+    model = models.resnet18(pretrained=pretrained, num_classes=200)
+    return LpConvert(model, log2p=4, set_requires_grad=dict(log2p=False))
