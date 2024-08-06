@@ -273,3 +273,15 @@ def abl4_resnet18_cifar100(pretrained=False, **kwargs):
         layer = resnet18_conv_layers[target]
         setattr(lpmodel, layer, getattr(model, layer))
     return lpmodel
+
+@register_model
+def abl234_resnet18_cifar100(pretrained=False, **kwargs):
+    model = models.resnet18(pretrained=pretrained, num_classes=100)
+    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
+
+    lpmodel = LpConvert( copy.deepcopy(model), log2p=1)
+    ablation_targets = [2,3,4]
+    for target in ablation_targets:
+        layer = resnet18_conv_layers[target]
+        setattr(lpmodel, layer, getattr(model, layer))
+    return lpmodel
