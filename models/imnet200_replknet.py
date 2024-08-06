@@ -3,6 +3,7 @@
 import torch
 import torch.nn as nn
 from torch.nn.functional import _pair
+import torch.nn.functional as F
 import torch.utils.checkpoint as checkpoint
 from timm.models.layers import DropPath
 from timm.models.registry import register_model
