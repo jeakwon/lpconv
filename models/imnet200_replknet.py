@@ -316,7 +316,7 @@ class RepLKNet(nn.Module):
                 m[1] = nn.Identity()
 
 def create_RepLKNet31T(drop_path_rate=0.3, num_classes=1000, use_checkpoint=True, small_kernel_merged=False):
-    return RepLKNet(large_kernel_sizes=[31,29,27,13], layers=[2,2,18,2], channels=[64,128,256,512],
+    return RepLKNet(large_kernel_sizes=[31,29,27,13], layers=[2,2,6,2], channels=[64,128,256,512],
                     drop_path_rate=drop_path_rate, small_kernel=5, num_classes=num_classes, use_checkpoint=use_checkpoint,
                     small_kernel_merged=small_kernel_merged)
 
