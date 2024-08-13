@@ -10,6 +10,7 @@ from .cifar100_lp2f import *
 from .cifar100_non import *
 from .cifar100_scl import *
 from .cifar100_abl import *
+from .cifar100_dan import *
 
 from .imnet200 import *
 from .imnet200_flp import *
