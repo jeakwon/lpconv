@@ -11,6 +11,7 @@ from .cifar100_non import *
 from .cifar100_scl import *
 from .cifar100_abl import *
 from .cifar100_dan import *
+from .cifar100_srn import *
 
 from .imnet200 import *
 from .imnet200_flp import *
