@@ -1,4 +1,4 @@
-"""Lp-Conv additional exp in CIFAR-100 with DeepAlexNet"""
+"""Lp-Conv additional exp in CIFAR-100 with ShallowResNet"""
 import torch
 import torch.nn as nn
 import torchvision.models as models
@@ -297,26 +297,26 @@ def resnet152(*, weights = None, progress: bool = True, **kwargs: Any) -> ResNet
 @register_model
 def lp2a_resnet10_cifar100(pretrained=False, **kwargs):
     model = resnet10(num_classes=100)
-    model.features[0] = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1) # for cifar shape 32x32
+    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return LpConvert(model, log2p=1)
 
 # AlexNet
 @register_model
 def lp2b_resnet10_cifar100(pretrained=False, **kwargs):
     model = resnet10(num_classes=100)
-    model.features[0] = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1) # for cifar shape 32x32
+    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return LpConvert(model, log2p=2)
 
 # AlexNet
 @register_model
 def lp2c_resnet10_cifar100(pretrained=False, **kwargs):
     model = resnet10(num_classes=100)
-    model.features[0] = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1) # for cifar shape 32x32
+    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return LpConvert(model, log2p=3)
 
 # AlexNet
 @register_model
 def lp2_resnet10_cifar100(pretrained=False, **kwargs):
     model = resnet10(num_classes=100)
-    model.features[0] = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1) # for cifar shape 32x32
+    model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False) # for cifar shape 32x32
     return LpConvert(model, log2p=4)
