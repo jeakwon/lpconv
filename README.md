@@ -1,20 +1,24 @@
-# Welcome to Our Project Repository!
+# Brain-inspired Lp-Convolution: Enhancing Large Kernels and Aligning with the Visual Cortex  
+[![ICLR 2025](https://img.shields.io/badge/ICLR-2025-blue)](https://openreview.net/forum?id=0LSAmFCc4p)  
 
-Thank you for visiting our code repository for Lp-Convolution! We are excited to share our work with the community and welcome any feedback or questions you might have.
+This repository contains the official implementation of **"Brain-inspired Lp-Convolution Benefits Large Kernels and Aligns Better with Visual Cortex"**, accepted at **ICLR 2025**. Our work introduces **Lp-Convolution**, a novel approach that enhances **large kernel convolutional neural networks (CNNs)** by integrating biologically-inspired trainable Gaussian sparsity, improving both **performance and alignment with neural representations in the visual cortex**.
 
-Please note that we are currently in the process of organizing and refining this repository to ensure that it is as user-friendly and informative as possible. We apologize for any inconvenience this may cause and appreciate your understanding and patience as we work to improve the repository.
+## Paper  
+🔗 **[ICLR 2025 OpenReview Link](https://openreview.net/forum?id=0LSAmFCc4p)**  
 
-We are actively working on updating and optimizing the codebase, documentation, and other resources, and we aim to have a more organized version available as soon as possible.
+📑 **Citation (BibTeX):**  
+```bibtex
+@inproceedings{kwon2025brain,
+  author    = {Jea Kwon and Sungjun Lim and Kyungwoo Song and C. Justin Lee},
+  title     = {Brain-inspired Lp-Convolution Benefits Large Kernels and Aligns Better with Visual Cortex},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2025},
+  url       = {https://openreview.net/forum?id=0LSAmFCc4p},
+  note      = {Accepted at ICLR 2025}
+}
+```
 
-In the meantime, if you have any questions, concerns, or need clarification on any aspect of the project, please do not hesitate to raise an issue or contact us directly. We value your input and are committed to addressing any inquiries promptly.
-
-Thank you once again for your interest in our work, and we look forward to your valuable feedback!
-
-Best regards, 
-Authors
-
-
-### Acknowledgement
+## Acknowledgement
 This code is based on [CycleMLP ICLR 2022](https://github.com/ShoufaChen/CycleMLP), [DeiT](https://github.com/facebookresearch/deit) and [pytorch-image-models](https://github.com/rwightman/pytorch-image-models).
 
 ### Install
