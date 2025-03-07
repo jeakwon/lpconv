@@ -3,6 +3,13 @@
 
 This repository contains the official implementation of **"Brain-inspired Lp-Convolution Benefits Large Kernels and Aligns Better with Visual Cortex"**, accepted at **ICLR 2025**. Our work introduces **Lp-Convolution**, a novel approach that enhances **large kernel convolutional neural networks (CNNs)** by integrating biologically-inspired trainable Gaussian sparsity, improving both **performance and alignment with neural representations in the visual cortex**.
 
+## How it works?
+Lp-convolution is new type of convolutional layer, overlaid with Lp-Mask. Lp-Mask is trainable mask and designed with multivariate p-generalized normal distribution (MPND).
+Here are some cool GIFs showing the 3D MPND animations:
+
+### P Only No Distortion
+![P Only No Distortion](https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_no_distortion_loop.gif?raw=true)
+
 ## Paper  
 🔗 **[ICLR 2025 OpenReview Link](https://openreview.net/forum?id=0LSAmFCc4p)**  
 
