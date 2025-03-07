@@ -4,24 +4,25 @@
 This repository contains the official implementation of **"Brain-inspired Lp-Convolution Benefits Large Kernels and Aligns Better with Visual Cortex"**, accepted at **ICLR 2025**. Our work introduces **Lp-Convolution**, a novel approach that enhances **large kernel convolutional neural networks (CNNs)** by integrating biologically-inspired trainable Gaussian sparsity, improving both **performance and alignment with neural representations in the visual cortex**.
 
 ## How it works?
-Lp-convolution is new type of convolutional layer, overlaid with Lp-Mask. Lp-Mask is trainable mask and designed with multivariate p-generalized normal distribution (MPND).
+Lp-convolution is new type of convolutional layer, conventional kernels are overlaid with Lp-Mask, channel-wise. Lp-Mask is trainable mask and designed with multivariate p-generalized normal distribution (MPND).
 
 ## MPND
+The MPND PDF is given by:
+
 $$ 
 \text{MPND}(x, y) = \beta e^{-\sum |\mathbf{C} \Delta \mathbf{s}|^p}
  $$
 
 Where:
 - $\Delta \mathbf{s} = [x - x_0, y - y_0]$ is the displacement from the center,
-- $\mathbf{C}$ is the inverse of the covariance matrix,
+- $\mathbf{C}$ is the covariance matrix,
 - $p$ is the power parameter of the $L_p$-norm,
 - $\beta$ is a normalization constant (set to 1 in these visualizations).
-By varying $ p $ and $ \mathbf{C} $, Lp-Mask dynamically shapes and explicitly constrains structured sparsity to convolutional kernels.
+By varying $ p $ and $ \mathbf{C} $, Lp-Mask dynamically shapes its contour.
 
-### Key Features
-- **\(p\)-Parameter Flexibility**: Controls the mask’s geometry (e.g., \(p=1\) for sparsity, \(p=2\) for Euclidean).
-- **Covariance Integration**: Adapts to data structure via \(C\), which is inverse of covariance matrix.
-- **Applications**: Useful in segmentation, convolution, and parameter exploration.
+### Visualization
+In practice, Lp-mask is trained by standard backpropagation. The trained parameters are $ p $ and $ \mathbf{C} $, channel-wisely.
+Following is examples of changes in mask shapes on varying conditions. Note, $\alpha$, $\gamma$, $\theta$ represent scale, distortion, rotation, which are calcuated from $ \mathbf{C} $ using singular value decomposition, for interpretability purpose. 
 
 <table>
   <tr>
