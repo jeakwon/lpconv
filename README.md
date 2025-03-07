@@ -18,11 +18,11 @@ Where:
 - $\mathbf{C}$ is the inverse of covariance matrix,
 - $p$ is the power parameter of the $L_p$-norm,
 - $\beta$ is a normalization constant (set to 1 in these visualizations).
-By varying $ p $ and $ \mathbf{C} $, Lp-Mask dynamically shapes its contour.
+By varying $p$ and $\mathbf{C}$, Lp-Mask dynamically shapes its contour.
 
 ### Visualization
-In practice, Lp-mask is trained by standard backpropagation. The trained parameters are $ p $ and $ \mathbf{C} $, channel-wisely.
-Following is examples of changes in mask shapes on varying conditions. Note, $\alpha$, $\gamma$, $\theta$ represent scale, distortion, rotation, which are calcuated from $ \mathbf{C} $ using singular value decomposition, for interpretability purpose. 
+In practice, Lp-mask is trained by standard backpropagation. The trained parameters are $p$ and $\mathbf{C}$, channel-wisely.
+Following is examples of changes in mask shapes on varying conditions. Note, $\alpha$, $\gamma$, $\theta$ represent scale, distortion, rotation, which are calcuated from $\mathbf{C}$ using singular value decomposition, for interpretability purpose. 
 
 <table>
   <tr>
