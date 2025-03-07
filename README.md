@@ -7,8 +7,24 @@ This repository contains the official implementation of **"Brain-inspired Lp-Con
 Lp-convolution is new type of convolutional layer, overlaid with Lp-Mask. Lp-Mask is trainable mask and designed with multivariate p-generalized normal distribution (MPND).
 Here are some cool GIFs showing the 3D MPND animations:
 
-### P Only No Distortion
-![P Only No Distortion](https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_no_distortion_loop.gif?raw=true)
+<table>
+  <tr>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_no_distortion_loop.gif?raw=true" width="400" height="400" alt="P Only No Distortion"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_with_distortion_loop.gif?raw=true" width="400" height="400" alt="P Only With Distortion"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p2_distortion_rotation_loop.gif?raw=true" width="400" height="400" alt="P2 Distortion Rotation"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p16_distortion_rotation_loop.gif?raw=true" width="400" height="400" alt="P16 Distortion Rotation"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_scale_up_90deg_horiz_loop.gif?raw=true" width="400" height="400" alt="Scale Up 90deg Horizontal"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_scale_up_180deg_vert_loop.gif?raw=true" width="400" height="400" alt="Scale Up 180deg Vertical"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_widen_loop.gif?raw=true" width="400" height="400" alt="Widen"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_narrow_loop.gif?raw=true" width="400" height="400" alt="Narrow"></td>
+  </tr>
+</table>
 
 ## Paper  
 🔗 **[ICLR 2025 OpenReview Link](https://openreview.net/forum?id=0LSAmFCc4p)**  
