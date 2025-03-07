@@ -7,6 +7,11 @@ This repository contains the official implementation of **"Brain-inspired Lp-Con
 Lp-convolution is new type of convolutional layer, overlaid with Lp-Mask. Lp-Mask is trainable mask and designed with multivariate p-generalized normal distribution (MPND).
 Here are some cool GIFs showing the 3D MPND animations:
 
+### Key Features
+- **\(p\)-Parameter Flexibility**: Controls the mask’s geometry (e.g., \(p=1\) for sparsity, \(p=2\) for Euclidean).
+- **Covariance Integration**: Adapts to data structure via \(C\), which is inverse of covariance matrix.
+- **Applications**: Useful in segmentation, convolution, and parameter exploration.
+
 <table>
   <tr>
     <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_no_distortion_loop.gif?raw=true" width="180" height="180" alt="P Only No Distortion"></td>
