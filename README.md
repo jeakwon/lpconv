@@ -15,7 +15,7 @@ $$
 
 Where:
 - $\Delta \mathbf{s} = [x - x_0, y - y_0]$ is the displacement from the center,
-- $\mathbf{C}$ is the covariance matrix,
+- $\mathbf{C}$ is the inverse of covariance matrix,
 - $p$ is the power parameter of the $L_p$-norm,
 - $\beta$ is a normalization constant (set to 1 in these visualizations).
 By varying $ p $ and $ \mathbf{C} $, Lp-Mask dynamically shapes its contour.
