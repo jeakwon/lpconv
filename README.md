@@ -7,18 +7,16 @@ This repository contains the official implementation of **"Brain-inspired Lp-Con
 Lp-convolution is new type of convolutional layer, overlaid with Lp-Mask. Lp-Mask is trainable mask and designed with multivariate p-generalized normal distribution (MPND).
 
 ## MPND
-The "Lp-Mask" is a conceptual framework that utilizes the $ L_p $-norm to define adaptive contours in multidimensional distributions, such as the Multivariate Power Normal Distribution (MPND). The MPND PDF is given by:
-
 $$ 
 \text{MPND}(x, y) = \beta e^{-\sum |\mathbf{C} \Delta \mathbf{s}|^p}
  $$
 
 Where:
 - $\Delta \mathbf{s} = [x - x_0, y - y_0]$ is the displacement from the center,
-- $\mathbf{C}$ is the covariance matrix,
+- $\mathbf{C}$ is the inverse of the covariance matrix,
 - $p$ is the power parameter of the $L_p$-norm,
 - $\beta$ is a normalization constant (set to 1 in these visualizations).
-By varying $ p $ and $ \mathbf{C} $, Lp-Mask dynamically shapes its contour, making it a versatile tool for data segmentation, convolutional processing, and visualization.
+By varying $ p $ and $ \mathbf{C} $, Lp-Mask dynamically shapes and explicitly constrains structured sparsity to convolutional kernels.
 
 ### Key Features
 - **\(p\)-Parameter Flexibility**: Controls the mask’s geometry (e.g., \(p=1\) for sparsity, \(p=2\) for Euclidean).
