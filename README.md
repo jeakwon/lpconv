@@ -9,16 +9,16 @@ Here are some cool GIFs showing the 3D MPND animations:
 
 <table>
   <tr>
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_no_distortion_loop.gif?raw=true" width="200" height="200" alt="P Only No Distortion"></td>
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_with_distortion_loop.gif?raw=true" width="200" height="200" alt="P Only With Distortion"></td>
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p2_distortion_rotation_loop.gif?raw=true" width="200" height="200" alt="P2 Distortion Rotation"></td>
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p16_distortion_rotation_loop.gif?raw=true" width="200" height="200" alt="P16 Distortion Rotation"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_no_distortion_loop.gif?raw=true" width="180" height="180" alt="P Only No Distortion"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p_only_with_distortion_loop.gif?raw=true" width="180" height="180" alt="P Only With Distortion"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p2_distortion_rotation_loop.gif?raw=true" width="180" height="180" alt="P2 Distortion Rotation"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p16_distortion_rotation_loop.gif?raw=true" width="180" height="180" alt="P16 Distortion Rotation"></td>
   </tr>
   <tr>
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_scale_up_90deg_horiz_loop.gif?raw=true" width="200" height="200" alt="Scale Up 90deg Horizontal"></td>
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_scale_up_180deg_vert_loop.gif?raw=true" width="200" height="200" alt="Scale Up 180deg Vertical"></td>
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_widen_loop.gif?raw=true" width="200" height="200" alt="Widen"></td>
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_narrow_loop.gif?raw=true" width="200" height="200" alt="Narrow"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_scale_up_90deg_horiz_loop.gif?raw=true" width="180" height="180" alt="Scale Up 90deg Horizontal"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_scale_up_180deg_vert_loop.gif?raw=true" width="180" height="180" alt="Scale Up 180deg Vertical"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_widen_loop.gif?raw=true" width="180" height="180" alt="Widen"></td>
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_narrow_loop.gif?raw=true" width="180" height="180" alt="Narrow"></td>
   </tr>
 </table>
 
