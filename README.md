@@ -14,11 +14,10 @@ $$
  $$
 
 Where:
-- $ \Delta \mathbf{s} = [x - x_0, y - y_0] $ is the displacement from the center,
-- $ \mathbf{C} $ is the covariance matrix,
-- $ p $ is the power parameter of the $ L_p $-norm,
-- $ \beta $ is a normalization constant (set to 1 in these visualizations).
-
+- $\Delta \mathbf{s} = [x - x_0, y - y_0]$ is the displacement from the center,
+- $\mathbf{C}$ is the covariance matrix,
+- $p$ is the power parameter of the $L_p$-norm,
+- $\beta$ is a normalization constant (set to 1 in these visualizations).
 By varying $ p $ and $ \mathbf{C} $, Lp-Mask dynamically shapes its contour, making it a versatile tool for data segmentation, convolutional processing, and visualization.
 
 ### Key Features
