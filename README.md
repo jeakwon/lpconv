@@ -34,8 +34,8 @@ Following is examples of changes in mask shapes on varying conditions. Note, $\a
     <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_p16_distortion_rotation_loop.gif?raw=true" width="250" height="250" alt="P16 Distortion Rotation"></td>
     <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_scale_up_90deg_horiz_loop.gif?raw=true" width="250" height="250" alt="Scale Up 90deg Horizontal"></td>
     <!-- <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_scale_up_250deg_vert_loop.gif?raw=true" width="250" height="250" alt="Scale Up 250deg Vertical"></td> -->
-    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_widen_loop.gif?raw=true" width="250" height="250" alt="Widen"></td>
-    <!-- <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_narrow_loop.gif?raw=true" width="250" height="250" alt="Narrow"></td> -->
+    <!-- <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_widen_loop.gif?raw=true" width="250" height="250" alt="Widen"></td> -->
+    <td><img src="https://github.com/jeakwon/lpconv/blob/main/assets/mpnd_3d_narrow_loop.gif?raw=true" width="250" height="250" alt="Narrow"></td>
   </tr>
 </table>
 
